@@ -1,0 +1,7 @@
+# User prompt - caso excelente
+
+Acá va el user prompt del caso "excelente": la consigna y el material de entrega que se le pasan
+al agente para que produzca la corrección.
+Responsable: por asignar.
+
+> PENDIENTE - completar
