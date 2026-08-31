@@ -7,7 +7,7 @@ Responsable: por asignar.
 ## Integrantes
 
 | Nombre | Rol |
-| Ignacio | Monteserin |
+|  |  |
 |  |  |
 |  |  |
 |  |  |
