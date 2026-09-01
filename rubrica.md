@@ -2,6 +2,9 @@
 
 Responsables: Andrea Vergara e Ignacio Monteserin (Dupla A).
 
+> **Nota de versión:** esta es la segunda versión de la rúbrica ejecutable, elaborada a partir de
+> la revisión y mejora de la propuesta inicial.
+
 Esta rúbrica operacionaliza las cinco dimensiones y los pesos de la rúbrica oficial. El agente
 debe asignar puntos únicamente mediante los subcriterios de este documento: no puede elegir
 libremente un número dentro de un rango ni compensar una falta con una impresión general.
