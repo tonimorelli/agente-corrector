@@ -46,9 +46,11 @@ un costo fue medido o que un control está implementado.
 - Varias copias del mismo resultado cuentan como una sola corrida independiente.
 - Una salida pegada manualmente sin entrada o configuración relacionada no prueba ejecución.
 - Ante contradicción material prevalece, en este orden: EV1, EV2, EV3 y EV4.
-- Una contradicción es **material** cuando cambiaría el valor de un subcriterio: por ejemplo, el
-  README declara un modelo o permiso diferente al configurado, el prompt promete JSON y las
-  corridas entregan prosa, o una decisión no coincide con la cronología de artefactos.
+- Una contradicción es **material** únicamente si coincide con alguno de estos patrones: (a)
+  discrepancia entre lo declarado en README/prompt y la configuración observable, (b) discrepancia
+  entre el formato prometido y el formato efectivamente producido, (c) discrepancia entre la
+  cronología de artefactos (commits, fechas) y la narrativa de decisiones. Cualquier otra
+  discrepancia se registra pero no dispara la regla de jerarquía EV1>EV2>EV3>EV4.
 - Si dos fuentes de igual jerarquía se contradicen y no puede resolverse cuál es vigente, se usa
   el menor valor compatible y se registra `CONTRADICCION_NO_RESUELTA`.
 - No se penaliza dos veces el mismo defecto, salvo que afecte requisitos distintos de manera
@@ -56,6 +58,8 @@ un costo fue medido o que un control está implementado.
 - Un requisito marcado “cuando corresponda” no exige usar herramientas, credenciales o
   escritura si la tarea no los necesita. El evaluador debe justificar la no aplicabilidad; los
   puntos no se redistribuyen.
+- “Cuando corresponda” aplica si el objetivo declarado en S1 requiere esa acción o dato para
+  cumplir su función; el evaluador debe citar la línea de S1 que sustenta la no aplicabilidad.
 
 ### 1.3 Niveles descriptivos
 
@@ -107,8 +111,12 @@ los componentes necesarios y asigna la supervisión adecuada al impacto.
 - **2:** la integración está implementada o registrada, pero su invocación no es completamente
   trazable, o falta comprobar un camino relevante.
 - **0:** falta una integración necesaria, está simulada sin declararlo o sólo se afirma su uso.
+- Evidencia aceptable: EV1 combinado con EV2 para 4; EV2 o EV3 incompleto para 2; EV4 sola no
+  alcanza para ningún valor mayor que 0.
 - Si el objetivo no requiere herramientas externas, se evalúa con la misma escala la integración
   entre los componentes internos indispensables y se documenta esa decisión.
+- La necesidad de herramientas externas se determina exclusivamente por lo declarado en S1. Si S1
+  no las menciona, se asume que no son necesarias.
 
 **S4. Formato y validez de la salida — 0, 2 o 4 puntos**
 
@@ -117,6 +125,8 @@ los componentes necesarios y asigna la supervisión adecuada al impacto.
 - **2:** la salida es utilizable, pero hay una desviación menor que no altera su significado, o
   no existe una validación mecánica para un formato que la admite.
 - **0:** la salida contradice el contrato, pierde información necesaria o no es procesable.
+- Evidencia aceptable: EV1 (salidas reales evaluadas contra el formato declarado), complementado
+  por EV2 si existe esquema formal de validación.
 
 **S5. Casos límite y manejo de fallas — 0, 2 o 4 puntos**
 
@@ -125,6 +135,10 @@ los componentes necesarios y asigna la supervisión adecuada al impacto.
 - **2:** la conducta ante fallas está implementada en prompt/código, pero no fue ejecutada, o
   se ejecutó un caso poco relevante.
 - **0:** no hay conducta definida o una falla observada produce una salida engañosa.
+- Evidencia aceptable: EV1 para 4; EV2 para 2.
+- Es relevante el caso que corresponde a una entrada fuera del dominio declarado en S1 (dato
+  faltante, formato inválido, entrada vacía, fallo de herramienta) o a un riesgo listado en G2.
+  Todo otro caso ejecutado se considera poco relevante.
 
 **S6. Supervisión y responsabilidad — 0, 2 o 5 puntos**
 
@@ -135,6 +149,8 @@ los componentes necesarios y asigna la supervisión adecuada al impacto.
   responsable.
 - **0:** no hay supervisión definida cuando el resultado puede producir una decisión o acción,
   o se atribuye responsabilidad final al agente.
+- Evidencia aceptable: EV2 (especificación explícita), verificada contra EV1 o EV3 (corridas) para
+  descartar contradicción.
 
 ### 2.2 Topes de la dimensión
 
@@ -169,6 +185,8 @@ evidencia corroborante, no requisito de haber trabajado en días diferentes.
 - **5:** hay tres o más iteraciones ordenadas, con artefacto o versión identificable.
 - **3:** hay dos iteraciones ordenadas y vinculadas a artefactos.
 - **0:** sólo se presenta el resultado final o una lista sin versiones distinguibles.
+- Evidencia aceptable: EV2 o EV3 (artefacto o versión con identificador verificable); EV4 sola no
+  cuenta como iteración.
 
 **P2. Problemas y evidencia de diagnóstico — 0, 2 o 5 puntos**
 
@@ -176,6 +194,11 @@ evidencia corroborante, no requisito de haber trabajado en días diferentes.
   prueba u observación que la reveló.
 - **2:** se explican problemas concretos, pero sólo uno tiene evidencia vinculada.
 - **0:** se afirma que “se iteró” sin describir problemas observados.
+- Evidencia aceptable: EV4 (narrativa) debe estar vinculada a EV1, EV2 o EV3 (la corrida u
+  observación citada); EV4 aislada no alcanza ningún valor mayor que 0.
+- Cuenta como hipótesis registrada sólo si el texto identifica (i) qué se observó como problema y
+  (ii) a qué corrida, prueba o artefacto específico se atribuye esa observación. Si falta (i) o
+  (ii), no cuenta como tal aunque use la palabra “hipótesis”.
 
 **P3. Decisiones y cambios trazables — 0, 3 o 5 puntos**
 
@@ -183,12 +206,16 @@ evidencia corroborante, no requisito de haber trabajado en días diferentes.
   correspondiente en prompt, código, configuración o alcance.
 - **3:** existe una relación completa problema → decisión → cambio.
 - **0:** las decisiones no están conectadas con cambios inspeccionables.
+- Evidencia aceptable: EV2 (cambio inspeccionable) vinculado explícitamente a EV4 (decisión
+  documentada); EV4 sola no alcanza.
 
 **P4. Verificación del efecto — 0, 2 o 5 puntos**
 
 - **5:** al menos dos cambios tienen comparación antes/después o prueba posterior y resultado.
 - **2:** un cambio tiene verificación posterior identificable.
 - **0:** no se muestra si los cambios mejoraron, empeoraron o mantuvieron el resultado.
+- Evidencia aceptable: EV1 o EV3 (comparación entre corridas o pruebas antes y después); EV4 sola
+  no alcanza.
 
 **P5. Alcance, supuestos y pendientes — 0, 2 o 5 puntos**
 
@@ -196,6 +223,8 @@ evidencia corroborante, no requisito de haber trabajado en días diferentes.
   limitaciones vigentes y pendientes, cada uno con motivo o impacto cuando corresponda.
 - **2:** se documenta parte de esos elementos, pero falta motivo, impacto o estado.
 - **0:** no se distinguen límites actuales de trabajo futuro.
+- Evidencia aceptable: EV4 (documentación explícita), dado que este subcriterio versa sobre
+  decisiones declaradas, no sobre funcionamiento verificable.
 
 ### 3.2 Topes de la dimensión
 
@@ -229,6 +258,11 @@ el mismo criterio, aunque no sea textualmente idéntica.
   inequívocamente su ubicación.
 - **1:** los componentes existen, pero uno requiere búsqueda o usa un equivalente no explicado.
 - **0:** faltan dos o más componentes o no puede identificarse cuál está vigente.
+- Evidencia aceptable: EV2 (estructura de archivos verificable), complementada por EV4 (README)
+  para el mapeo de ubicación.
+- Es inequívoco cuando el README contiene un enlace o ruta explícita a cada componente exigido. Si
+  el evaluador debe inferir la ubicación por convención de nombres sin mención explícita en el
+  README, se considera que requiere búsqueda.
 
 **R2. Instrucciones y dependencias — 0, 2 o 4 puntos**
 
@@ -236,6 +270,7 @@ el mismo criterio, aunque no sea textualmente idéntica.
   exponer secretos y preparación de datos.
 - **2:** el flujo general puede reconstruirse, pero falta una versión, dependencia o paso menor.
 - **0:** faltan instrucciones indispensables o requieren conocimiento no documentado.
+- Evidencia aceptable: EV2 (instrucciones y archivo de dependencias inspeccionables).
 
 **R3. Registro de corridas — 0, 2 o 4 puntos**
 
@@ -243,6 +278,8 @@ el mismo criterio, aunque no sea textualmente idéntica.
   referencia inmutable, salida cruda y resultado/estado.
 - **2:** hay dos corridas completas, o tres con un campo obligatorio ausente en alguna.
 - **0:** hay menos de dos corridas reconstruibles.
+- Evidencia aceptable: EV1 si la corrida es reejecutable; EV3 si sólo es registro conservado con
+  los campos exigidos.
 
 **R4. Configuración de ejecución — 0, 1 o 2 puntos**
 
@@ -250,6 +287,7 @@ el mismo criterio, aunque no sea textualmente idéntica.
   si una plataforma no expone un dato, se registra como `NO_DISPONIBLE`.
 - **1:** se identifica modelo, pero faltan parámetros relevantes.
 - **0:** no puede saberse con qué configuración se generaron las salidas.
+- Evidencia aceptable: EV2 o EV3 (dato de configuración identificable junto a la corrida).
 
 **R5. Criterio de reproducción — 0, 1 o 2 puntos**
 
@@ -257,6 +295,8 @@ el mismo criterio, aunque no sea textualmente idéntica.
   al menos una reproducción se compara con ese criterio.
 - **1:** existe criterio objetivo, pero no una reproducción comparada.
 - **0:** “resultado similar/comparable” no está operacionalizado.
+- Evidencia aceptable: EV2 para el criterio definido; EV1 o EV3 para la reproducción comparada
+  contra ese criterio.
 
 ### 4.2 Topes de la dimensión
 
@@ -290,6 +330,7 @@ con desempeño observado.
   llamadas a herramientas) obtenidas de logs, API o método reproducible.
 - **1:** se usa una estimación explicada sobre entradas representativas.
 - **0:** no hay medición ni método de estimación.
+- Evidencia aceptable: EV1 o EV2 para 3; EV4 con método de estimación explicado para 1.
 
 **E2. Precio y cálculo unitario — 0, 2 o 4 puntos**
 
@@ -297,6 +338,8 @@ con desempeño observado.
   correcta y separa componentes con tarifas distintas.
 - **2:** el cálculo es reconstruible, pero falta fuente/fecha o un costo menor.
 - **0:** sólo se declara un costo final o el cálculo usa un modelo/precio incompatible.
+- Evidencia aceptable: EV2 (fórmula y cálculo inspeccionables); EV4 aceptable únicamente para la
+  cita de fuente y fecha de precios.
 
 **E3. Proyección y sensibilidad — 0, 2 o 4 puntos**
 
@@ -304,6 +347,7 @@ con desempeño observado.
   escenario alternativo relevante (volumen, longitud, errores, revisión o herramienta).
 - **2:** existe una proyección correcta con fórmula, pero sin sensibilidad.
 - **0:** no hay proyección reconstruible.
+- Evidencia aceptable: EV2 (fórmula y supuestos inspeccionables).
 
 **E4. Elección costo-desempeño — 0, 2 o 4 puntos**
 
@@ -311,6 +355,11 @@ con desempeño observado.
   evidencia de resultados y justifica la opción elegida por costo y calidad.
 - **2:** explica la elección con datos parciales o una comparación no completamente controlada.
 - **0:** usa afirmaciones como “más potente” o “más barato” sin evaluación vinculada.
+- Evidencia aceptable: EV1 o EV3 (resultados conservados de ambas opciones bajo las mismas
+  entradas).
+- Es completamente controlada cuando ambas opciones se evalúan con el mismo conjunto de entradas y
+  el mismo criterio de éxito de S1. Cualquier variación en entradas, criterio o cantidad de
+  corridas entre opciones la vuelve no controlada.
 
 ### 5.2 Topes de la dimensión
 
@@ -343,6 +392,8 @@ el impacto de las acciones del sistema.
   y mecanismo de credenciales sin revelar secretos; coincide con la implementación observable.
 - **1:** inventario parcial o permisos descritos genéricamente.
 - **0:** no puede determinarse qué accede o las declaraciones contradicen la configuración.
+- Evidencia aceptable: EV4 (inventario declarado) contrastado con EV2 (configuración o permisos
+  observables); prevalece EV2 ante discrepancia.
 
 **G2. Riesgos priorizados — 0, 1 o 3 puntos**
 
@@ -350,6 +401,7 @@ el impacto de las acciones del sistema.
   prioridad; incluye privacidad/seguridad cuando corresponda.
 - **1:** menciona un escenario concreto, pero sin consecuencia o prioridad.
 - **0:** sólo afirma que “la IA puede equivocarse”.
+- Evidencia aceptable: EV4 (documentación de riesgos con causa, consecuencia e impacto).
 
 **G3. Controles y comportamiento seguro — 0, 1 o 3 puntos**
 
@@ -358,6 +410,8 @@ el impacto de las acciones del sistema.
 - **1:** hay mitigaciones documentadas, pero ninguna se comprueba o queda un riesgo prioritario
   sin respuesta.
 - **0:** no hay mitigaciones accionables o el sistema oculta la falla.
+- Evidencia aceptable: EV1, EV2 o EV3 (control visible en ejecución, código/configuración o
+  registro de corrida); EV4 sola no alcanza ningún valor mayor que 0.
 
 **G4. Supervisión, aprobación y escalamiento — 0, 1 o 3 puntos**
 
@@ -365,6 +419,12 @@ el impacto de las acciones del sistema.
   excepción, de modo proporcional al impacto.
 - **1:** menciona revisión humana, pero faltan objeto, disparador, rol o escalamiento.
 - **0:** no hay supervisión para decisiones/acciones relevantes.
+- Evidencia aceptable: EV2 (especificación explícita), verificada contra EV1 o EV3 para descartar
+  contradicción.
+- Si la acción puede tener efectos externos irreversibles, la supervisión exige aprobación previa
+  de un rol humano identificado; si los efectos son internos y reversibles, alcanza con revisión
+  posterior. Todo control que no alcance el nivel correspondiente a esta clasificación se
+  considera no proporcional.
 
 **G5. Responsabilidad, auditoría y reversibilidad — 0, 1 o 3 puntos**
 
@@ -372,6 +432,8 @@ el impacto de las acciones del sistema.
   y define reversión/contención cuando la acción puede producir efectos externos.
 - **1:** hay responsables nominales o logs, pero no ambos, o falta reversión cuando corresponde.
 - **0:** nadie asume responsabilidad y no existe trazabilidad mínima.
+- Evidencia aceptable: EV4 para la asignación de dueño y responsable; EV2 o EV3 para la
+  trazabilidad/logs; ambos deben estar presentes para el valor máximo.
 
 ### 6.2 Topes de la dimensión
 
