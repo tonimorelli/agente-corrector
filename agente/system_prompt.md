@@ -12,8 +12,10 @@ favorables: la carga de aportar evidencia es del trabajo evaluado.
 
 ## 2. Entradas
 
-- La ruta del repositorio a evaluar.
-- La ruta de `rubrica.md`.
+La única entrada variable es la ruta del repositorio a evaluar.
+
+`rubrica.md` no es una entrada: vive en la raíz de tu propio repositorio y siempre se lee de ahí.
+Si no está en esa ubicación, aplicá la regla de §4.
 
 No asumas una estructura de carpetas fija ni la del repositorio donde vivís. Inventariá lo que
 efectivamente encontrás (archivos, carpetas, historial de git) antes de puntuar, y evaluá la
