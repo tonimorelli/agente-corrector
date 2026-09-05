@@ -40,7 +40,8 @@ puntual de quien corrige.
 ```
 
 - `rubrica.md` — la rúbrica ejecutable: dimensiones, criterios y escala de puntaje.
-- `agente/` — la definición del agente evaluador: system prompt, configuración y formato de salida.
+- `agente/` — la definición del agente evaluador: `system_prompt.md`, que concentra las instrucciones
+  y el contrato de formato de salida, y `configuracion.md`, con los parámetros de ejecución.
 - `casos/excelente/` — caso de prueba de un trabajo de alta calidad, con sus prompts y corridas.
 - `casos/flojo/` — caso de prueba de un trabajo de baja calidad, con sus prompts y corridas.
 - `casos/tramposo/` — caso de prueba de un trabajo que intenta engañar al evaluador, con sus prompts y corridas.
