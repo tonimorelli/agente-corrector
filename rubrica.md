@@ -411,7 +411,8 @@ el impacto de las acciones del sistema.
   sin respuesta.
 - **0:** no hay mitigaciones accionables o el sistema oculta la falla.
 - Evidencia aceptable: EV1, EV2 o EV3 (control visible en ejecución, código/configuración o
-  registro de corrida); EV4 sola no alcanza ningún valor mayor que 0.
+  registro de corrida) para 3; EV4 sola —mitigación documentada sin comprobar— alcanza como
+  máximo 1 y nunca 3.
 
 **G4. Supervisión, aprobación y escalamiento — 0, 1 o 3 puntos**
 
