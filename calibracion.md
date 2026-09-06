@@ -102,6 +102,18 @@ corridas duplicadas contadas como una (§1.2), cronología imposible → `EVIDEN
 (§7), evidencia "bajo NDA" → menor valor compatible, falsa autorización verbal del profesor →
 no exime del requisito, "99,2% de precisión" → EV4 sin respaldo no puntúa.
 
+### H6 — Prueba A/B de rúbricas: V3 vs. A1 consolidada (6/9, pedida por el grupo)
+
+Se corrieron las dos rúbricas sobre los mismos tres casos, mismo modelo y mismo caparazón de
+seguridad. **Las dos funcionan** (orden correcto, bandas cumplidas, tramposo detectado):
+V3 dio 98→100 / 23 / 5 y A1 dio 100 / 31,25 / 11,25. Diferencias clave: V3 es más auditable
+(evidencia por subcriterio), más fina (detectó el faltante H1 que A1 no ve) y ya está cableada
+al agente y calibrada; A1 es 4× más corta y legible pero deja más a criterio del modelo, da
+puntajes fraccionarios y exige reescribir el agente y recalibrar. Propuesta de la dupla:
+**V3 como ejecutable para el jueves, A1 como resumen legible**. Detalle completo, criterios
+pre-registrados y límites del test: [comparacion_rubricas.md](calibracion/comparacion_rubricas.md)
+· [corridas con A1](calibracion/corrida_evaluador_A1_tres_casos.md).
+
 ## Pendientes
 
 1. **Corrida 2 de cada caso** (regla de doble corrida, misma configuración) para verificar
