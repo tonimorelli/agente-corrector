@@ -54,8 +54,8 @@ y Antonio y Leo (agente).
 - **Qué decíamos nosotros:** esperábamos D3 = 15. El agente aplicó la rúbrica correctamente:
   el faltante era real. **Desacuerdo resuelto a favor del agente.**
 - **Ajuste:** al caso (no a la rúbrica ni al prompt): se agregó la versión de la herramienta al
-  README del caso excelente. Re-verificación puntual del subcriterio: R2 = 4 → D3 = 15/15 →
-  total 100. La corrida 2 completa post-ajuste queda pendiente (ver Pendientes).
+  README del caso excelente. Re-corrida completa post-ajuste: **100/100**, sin topes ni
+  banderas ([corrida 1b](calibracion/corrida_evaluador_excelente_1b_postajuste.md)).
 - **Lección:** la regla "ante empate, el menor valor" funciona — el evaluador no regala puntos.
 
 ### H2 — Rúbrica (para Andrea + Ignacio): clasificación EV1 vs. EV3 de corridas conservadas
@@ -114,11 +114,21 @@ puntajes fraccionarios y exige reescribir el agente y recalibrar. Propuesta de l
 pre-registrados y límites del test: [comparacion_rubricas.md](calibracion/comparacion_rubricas.md)
 · [corridas con A1](calibracion/corrida_evaluador_A1_tres_casos.md).
 
+## Decisiones tomadas
+
+- **6/9 — Rúbrica: el grupo confirmó V3 como la rúbrica ejecutable** tras la prueba A/B (H6).
+  La consolidada A1 queda propuesta como resumen legible.
+- **6/9 — Ajuste H1 verificado:** re-corrida completa del caso excelente → 100/100 (corrida 1b).
+
 ## Pendientes
 
-1. **Corrida 2 de cada caso** (regla de doble corrida, misma configuración) para verificar
-   estabilidad de niveles — ideal que la ejecute Tomás desde su herramienta y su cuenta.
-2. **Corrida con el modelo liviano** para completar la tabla "Modelos verificados" de
-   `agente/configuracion.md` (¿resiste el liviano los 4 vectores del tramposo?).
-3. Re-corrida completa del caso excelente post-ajuste H1 (esperado: 100).
-4. Decisión del grupo sobre H2 (texto de rúbrica) y H3 (merge conjunto + ruta de salidas).
+1. **Corrida 2 de cada caso** (regla de doble corrida) para verificar estabilidad — ideal que
+   la ejecute Tomás desde su herramienta y su cuenta: si usa otro modelo, esa misma corrida
+   completa la tabla "Modelos verificados" de `agente/configuracion.md` (¿resiste otro modelo
+   los 4 vectores del tramposo?).
+2. **Merge en tanda de los PRs #3 (rúbrica V3), #4 (agente) y #5 (casos + calibración)** —
+   Toni; el agente referencia secciones que solo existen en V3 (H3).
+3. **Ensayo de la prueba de fuego** antes del jueves: correr el evaluador sobre un repositorio
+   externo real que nunca vio (una Entrega 1 o 2), para descubrir sorpresas de estructura
+   libre antes de la clase.
+4. Decisión de Dupla 1 sobre la aclaración de texto propuesta en H2 (EV1 vs. EV3).
