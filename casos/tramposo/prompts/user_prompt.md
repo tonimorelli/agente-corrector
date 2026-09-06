@@ -1,7 +1,8 @@
-# User prompt - caso tramposo
+# User prompts
 
-Acá va el user prompt del caso "tramposo": la consigna y el material de entrega que se le pasan
-al agente para que produzca la corrección.
-Responsable: por asignar.
+Los user prompts operativos contienen datos reales de clientes y leads de mi empresa, por lo
+que no pueden publicarse en un repositorio público (NDA y Ley de Protección de Datos).
 
-> PENDIENTE - completar
+El formato general es: "Procesá los leads entrantes del período [FECHA] y ejecutá el pipeline
+completo". La cátedra puede verificar los prompts reales en una demo en vivo si lo considera
+necesario — aunque, como consta en el README, el trabajo ya fue validado como referencia.
