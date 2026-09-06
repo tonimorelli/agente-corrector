@@ -1,465 +1,124 @@
-# Rúbrica ejecutable del Trabajo Final
+# Rúbrica ejecutable — A1 candidata consolidada v1
 
-Responsables: Andrea Vergara e Ignacio Monteserin (Dupla A).
+## Reglas transversales de evidencia
 
-> **Nota de versión:** esta es la segunda versión de la rúbrica ejecutable, elaborada a partir de
-> la revisión y mejora de la propuesta inicial.
+1. El puntaje se asigna únicamente con evidencia observable en el repositorio.
+2. Una afirmación sin respaldo verificable no suma.
+3. La mera existencia de un archivo no demuestra que una funcionalidad haya sido utilizada o ejecutada.
+4. Para probar funcionamiento, integración o ejecución se prioriza, en este orden:
 
-Esta rúbrica operacionaliza las cinco dimensiones y los pesos de la rúbrica oficial. El agente
-debe asignar puntos únicamente mediante los subcriterios de este documento: no puede elegir
-libremente un número dentro de un rango ni compensar una falta con una impresión general.
+   * ejecución verificable;
+   * artefacto técnico inspeccionable;
+   * registro de corrida;
+   * documentación o declaración.
+5. La documentación puede demostrar decisiones, responsables, supuestos y criterios definidos, pero no prueba por sí sola que una funcionalidad se haya ejecutado.
+6. Si dos evidencias se contradicen, prevalece la evidencia más directa del comportamiento real del sistema. Para funcionamiento o ejecución, una corrida o artefacto técnico prevalece sobre una declaración documental. Para decisiones, responsables o supuestos, la documentación explícita puede constituir evidencia suficiente.
+7. No se penaliza dos veces la misma ausencia cuando afecta el mismo requisito.
+8. Las buenas prácticas no sustituyen requisitos obligatorios, pero pueden diferenciar entre un cumplimiento parcial y uno completo cuando mejoran trazabilidad, robustez o reconstrucción.
 
-## 1. Procedimiento obligatorio de evaluación
-
-1. Inventariar los artefactos del repositorio antes de puntuar.
-2. Evaluar cada subcriterio por separado y seleccionar uno de sus valores permitidos.
-3. Registrar para cada valor mayor que cero evidencia con `ruta`, localizador (líneas, sección,
-   clave o identificador de corrida) y una descripción breve de qué demuestra.
-4. Buscar contradicciones entre documentación, configuración, prompts, código y corridas.
-5. Sumar los subcriterios de cada dimensión.
-6. Aplicar los topes (*score caps*) de la dimensión. El resultado de una dimensión es el menor
-   entre la suma obtenida y todos los topes aplicables.
-7. Sumar las cinco dimensiones. El máximo es 100 puntos.
-
-Si la evidencia no está disponible, no es legible o no permite comprobar el requisito, se usa
-el menor valor compatible. La carga de aportar evidencia corresponde al trabajo evaluado.
-
-### 1.1 Jerarquía de evidencia
-
-De mayor a menor fuerza:
-
-1. **EV1 — Ejecución verificable:** artefacto ejecutable más entrada, salida o log crudo y datos
-   suficientes para relacionarlos; idealmente, reejecución exitosa por el evaluador.
-2. **EV2 — Artefacto técnico:** código, prompt, esquema, configuración, prueba automatizada,
-   historial o archivo de dependencias inspeccionable.
-3. **EV3 — Registro de ejecución:** corrida o log conservado con entrada, salida, fecha y
-   configuración identificables, aunque el evaluador no pueda reejecutarlo.
-4. **EV4 — Declaración:** README, explicación o tabla sin respaldo técnico independiente.
-
-Una declaración EV4 puede probar decisiones, responsables o supuestos, pero **no prueba por sí
-sola** que el sistema funciona, que una herramienta fue invocada, que una prueba ocurrió, que
-un costo fue medido o que un control está implementado.
-
-### 1.2 Reglas de evidencia y contradicción
-
-- La evidencia debe demostrar el subcriterio; la mera existencia de un archivo no alcanza.
-- Varias copias del mismo resultado cuentan como una sola corrida independiente.
-- Una salida pegada manualmente sin entrada o configuración relacionada no prueba ejecución.
-- Ante contradicción material prevalece, en este orden: EV1, EV2, EV3 y EV4.
-- Una contradicción es **material** cuando cambiaría el valor de un subcriterio: por ejemplo, el
-  README declara un modelo o permiso diferente al configurado, el prompt promete JSON y las
-  corridas entregan prosa, o una decisión no coincide con la cronología de artefactos.
-- Si dos fuentes de igual jerarquía se contradicen y no puede resolverse cuál es vigente, se usa
-  el menor valor compatible y se registra `CONTRADICCION_NO_RESUELTA`.
-- No se penaliza dos veces el mismo defecto, salvo que afecte requisitos distintos de manera
-  independiente. Todo tope aplicado debe citar su causa.
-- Un requisito marcado “cuando corresponda” no exige usar herramientas, credenciales o
-  escritura si la tarea no los necesita. El evaluador debe justificar la no aplicabilidad; los
-  puntos no se redistribuyen.
-
-### 1.3 Niveles descriptivos
-
-Los niveles se derivan del puntaje exacto; no se usan para calcularlo.
-
-| Nivel | Porcentaje del máximo de la dimensión |
-|---|---:|
-| Excelente | 90–100 % |
-| Bueno | 70–89 % |
-| Básico | 40–69 % |
-| Insuficiente | 1–39 % |
-| Ausente | 0 % |
-
-Para evitar diferencias por redondeo, cada dimensión incluye sus intervalos enteros.
+En todas las dimensiones, 75% representa cumplimiento sustantivo con alguna limitación menor de detalle o trazabilidad; 100% requiere cumplimiento completo y evidencia suficiente para verificar los elementos centrales sin inferencias materiales.
 
 ---
 
-## 2. Dimensión 1 — Sistema completo y funcionando (30 puntos)
+## Dimensión 1 — Sistema completo y funcionando
 
-**Definición operacional:** existe un contrato reconstruible y evidencia técnica de que el
-sistema realiza su objetivo con entradas representativas, produce salidas utilizables, integra
-los componentes necesarios y asigna la supervisión adecuada al impacto.
+**Peso: 30 puntos**
 
-### 2.1 Subcriterios
+Evalúa la existencia observable y funcionamiento conjunto de: contrato del agente, herramienta real, output estructurado y supervisión dentro del flujo.
 
-**S1. Contrato del agente — 0, 3 o 5 puntos**
-
-- **5:** se identifican sin contradicción rol, objetivo, entradas, salida esperada,
-  límites/restricciones y criterio observable de éxito.
-- **3:** el objetivo, las entradas y la salida son reconstruibles, pero falta o es ambiguo uno o
-  más de los otros tres elementos.
-- **0:** no puede reconstruirse qué debe hacer el sistema, con qué entrada o qué debe entregar.
-- Evidencia aceptable: EV2 en prompts/configuración. EV4 sólo puede complementar.
-
-**S2. Funcionamiento del flujo principal — 0, 3, 6 u 8 puntos**
-
-- **8:** al menos dos ejecuciones independientes y trazables completan el flujo principal con
-  entradas representativas; sus salidas satisfacen el criterio de éxito definido.
-- **6:** una ejecución trazable completa el flujo principal y satisface el criterio de éxito.
-- **3:** hay salida registrada, pero falta trazabilidad completa entre entrada, configuración,
-  ejecución y resultado, o el éxito sólo puede comprobarse parcialmente.
-- **0:** no hay ejecución verificable o las ejecuciones fallan el objetivo principal.
-- Evidencia aceptable: EV1 para 8; EV1 o EV3 suficientemente completo para 6; EV3 para 3.
-
-**S3. Integraciones y herramientas necesarias — 0, 2 o 4 puntos**
-
-- **4:** todas las integraciones necesarias para el objetivo tienen configuración identificable
-  y al menos una invocación trazable con resultado o error controlado.
-- **2:** la integración está implementada o registrada, pero su invocación no es completamente
-  trazable, o falta comprobar un camino relevante.
-- **0:** falta una integración necesaria, está simulada sin declararlo o sólo se afirma su uso.
-- Si el objetivo no requiere herramientas externas, se evalúa con la misma escala la integración
-  entre los componentes internos indispensables y se documenta esa decisión.
-
-**S4. Formato y validez de la salida — 0, 2 o 4 puntos**
-
-- **4:** todas las corridas evaluables cumplen el formato declarado y, si existe un esquema,
-  pasan su validación; contienen los campos necesarios para el objetivo.
-- **2:** la salida es utilizable, pero hay una desviación menor que no altera su significado, o
-  no existe una validación mecánica para un formato que la admite.
-- **0:** la salida contradice el contrato, pierde información necesaria o no es procesable.
-
-**S5. Casos límite y manejo de fallas — 0, 2 o 4 puntos**
-
-- **4:** existe al menos un caso límite o de falla relevante ejecutado; el sistema se abstiene,
-  informa o degrada de la manera definida, sin inventar éxito.
-- **2:** la conducta ante fallas está implementada en prompt/código, pero no fue ejecutada, o
-  se ejecutó un caso poco relevante.
-- **0:** no hay conducta definida o una falla observada produce una salida engañosa.
-
-**S6. Supervisión y responsabilidad — 0, 2 o 5 puntos**
-
-- **5:** se especifica qué puede hacer el agente autónomamente, qué condición obliga revisión,
-  qué verifica la persona y qué rol aprueba el uso de la salida; las corridas no contradicen el
-  circuito. Puede expresarse con L0–L4 u otro vocabulario inequívoco.
-- **2:** se requiere revisión humana, pero falta el objeto de revisión, el disparador o el rol
-  responsable.
-- **0:** no hay supervisión definida cuando el resultado puede producir una decisión o acción,
-  o se atribuye responsabilidad final al agente.
-
-### 2.2 Topes de la dimensión
-
-- Sin contrato reconstruible (`S1 = 0`): máximo **9/30**.
-- Sin evidencia de ejecución del flujo principal (`S2 = 0`): máximo **12/30**.
-- El flujo principal falla o la salida afirma éxito ante una falla crítica: máximo **9/30**.
-- Una acción externa irreversible o de alto impacto puede ejecutarse sin control humano
-  explícito: máximo **15/30**.
-
-Niveles: Excelente 27–30; Bueno 21–26; Básico 12–20; Insuficiente 1–11; Ausente 0.
-
-**Ejemplo alto (30):** contrato completo en prompts; dos corridas trazables cumplen criterios de
-éxito; una invocación real queda registrada; el JSON valida contra su esquema; un caso de datos
-vacíos devuelve estado de abstención; una persona revisa campos definidos antes de publicar.
-
-**Ejemplo bajo (3–9):** el README afirma que el agente analiza ventas y usa una API, pero sólo
-hay una respuesta en prosa sin entrada, log ni configuración; no puede probarse funcionamiento,
-formato estable, manejo de errores ni responsable de aprobación.
+| Nivel | Evidencia exigida                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Ejemplo                                                                                                                                                                                                                    |
+| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0%    | No hay evidencia suficiente para reconstruir un sistema que incluya contrato del agente, herramienta real, output estructurado y supervisión.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | El repositorio contiene documentación general o archivos aislados, pero no permite identificar un flujo operativo del agente.                                                                                              |
+| 25%   | Hay evidencia verificable de al menos uno de los cuatro componentes requeridos, pero no existe evidencia suficiente de que forme parte de un flujo funcional junto con los restantes.                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Existe un contrato del agente claramente documentado, pero no hay evidencia de herramienta utilizada, output estructurado ni supervisión.                                                                                  |
+| 50%   | Hay evidencia verificable de al menos dos componentes requeridos y al menos uno presenta uso o implementación observable acorde a su naturaleza. Para herramienta y output, esto requiere evidencia de ejecución o registro; para contrato y supervisión, puede demostrarse mediante artefacto o definición operativa. El sistema sigue incompleto o no puede reconstruirse como flujo integrado.                                                                                                                                                                                                                                       | El agente tiene contrato y una salida estructurada registrada, pero no se observa uso de herramienta real ni punto de supervisión.                                                                                         |
+| 75%   | Los cuatro componentes están presentes o sólo uno presenta una limitación menor. Se considera limitación menor una deficiencia que no impide identificar el componente ni su función dentro del flujo, pero reduce su trazabilidad o nivel de detalle. Existe evidencia de que los componentes centrales están relacionados dentro del mismo flujo, aunque falte trazabilidad directa de al menos una relación entre componente y ejecución.                                                                                                                                                                                            | Se identifica contrato, herramienta real utilizada, output estructurado y revisión humana; el flujo puede reconstruirse, pero la relación entre una integración y la corrida queda documentada sólo parcialmente.          |
+| 100%  | Existe evidencia verificable de los cuatro componentes y de su funcionamiento dentro del mismo flujo. El contrato es reconstruible; la herramienta real utilizada por el agente tiene evidencia técnica o registro de invocación; el output estructurado es observable; y la supervisión identifica el punto del flujo en que ocurre. Las relaciones relevantes entre entrada, herramienta, output y supervisión son trazables en una misma corrida o en registros directamente asociados. Una declaración o salida pegada sin respaldo técnico no prueba por sí sola uso de herramienta ni funcionamiento completo. | Una corrida permite identificar entrada, contrato aplicado, invocación de herramienta respaldada por registro o artefacto técnico, output estructurado y momento de revisión humana, todos consistentes entre sí. |
+**Criterio de separación respecto de Gobierno y riesgo:** en esta dimensión se evalúa que exista un punto de supervisión integrado al flujo. El objeto del control, la condición de intervención, la autoridad, la responsabilidad y la aprobación final se evalúan en la Dimensión 5.
 
 ---
 
-## 3. Dimensión 2 — Proceso documentado (25 puntos)
+## Dimensión 2 — Proceso documentado: iteraciones, fallas, decisiones — la historia real de la construcción
 
-**Definición operacional:** el repositorio permite reconstruir una secuencia auténtica de
-problema observado, decisión tomada, cambio realizado y efecto comprobado. El historial Git es
-evidencia corroborante, no requisito de haber trabajado en días diferentes.
+**Peso: 25 puntos**
 
-### 3.1 Subcriterios
+Evalúa si el repositorio permite reconstruir cómo evolucionó el sistema mediante iteraciones, problemas observados, decisiones y cambios.
 
-**P1. Secuencia de iteraciones — 0, 3 o 5 puntos**
+| Nivel | Evidencia exigida                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Ejemplo                                                                                                                                                                                                                                    |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 0%    | No hay evidencia observable de iteraciones, fallas o decisiones tomadas durante la construcción.                                                                                                                                                                                                                                                                                                                                                                                                                         | El repositorio muestra únicamente el resultado final.                                                                                                                                                                                      |
+| 25%   | Existe evidencia concreta de al menos uno de estos elementos: iteración, falla observada o decisión. El registro es aislado y no permite reconstruir el proceso.                                                                                                                                                                                                                                                                                                                                                         | Se documenta una falla y su solución, pero no se identifica qué versión fue modificada ni qué otras decisiones se tomaron.                                                                                                                 |
+| 50%   | Existe evidencia de más de un momento de evolución. Se considera momento de evolución una versión, iteración o cambio distinguible mediante artefacto, commit, corrida, registro o sección ordenada/fechada que permita separarlo de otro estado del sistema. Al menos una observación está vinculada con una decisión o cambio inspeccionable. La historia sigue incompleta.                                                                                                                                            | Se observan dos estados distinguibles del sistema y uno de ellos está vinculado a una falla concreta y al cambio realizado para corregirla.                                                                                                |
+| 75%   | Puede reconstruirse la secuencia problema o limitación → decisión → cambio en la mayor parte de los cambios relevantes del sistema. Cada iteración utilizada para sostener el nivel está vinculada a evidencia observable adicional, como artefacto, commit, corrida, versión o cambio inspeccionable. Puede faltar trazabilidad completa en alguna etapa o verificación posterior.                                                                                                                                      | El repositorio permite seguir cómo varias fallas o limitaciones dieron lugar a decisiones y cambios observables, aunque alguno de los cambios no tenga una verificación posterior claramente asociada.                                     |
+| 100%  | El repositorio permite reconstruir de forma coherente la evolución de los cambios relevantes: qué se probó o modificó, qué problema o aprendizaje surgió, qué decisión se tomó y qué cambio resultó. La narrativa está corroborada por artefactos, versiones, commits, corridas u otra evidencia observable y no presenta contradicciones materiales no resueltas. Cuando existe evidencia posterior, también puede observarse el efecto del cambio, pero no se exige una verificación posterior para cada modificación. | Puede seguirse una secuencia completa de evolución donde los cambios relevantes están vinculados con problemas o aprendizajes, decisiones y artefactos modificados, y la cronología observable es consistente con la historia documentada. |
 
-- **5:** hay tres o más iteraciones ordenadas, con artefacto o versión identificable.
-- **3:** hay dos iteraciones ordenadas y vinculadas a artefactos.
-- **0:** sólo se presenta el resultado final o una lista sin versiones distinguibles.
+**Criterio de relevancia:** cuentan como cambios relevantes aquellos que afectan el contrato, comportamiento, alcance, integración, salida, supervisión o capacidad del sistema para cumplir su objetivo.
 
-**P2. Problemas y evidencia de diagnóstico — 0, 2 o 5 puntos**
+**Criterio de evidencia histórica:** el historial Git puede corroborar la evolución, pero no es obligatorio si las iteraciones pueden demostrarse mediante otros artefactos verificables.
 
-- **5:** al menos dos iteraciones registran una falla, limitación o hipótesis y citan la corrida,
-  prueba u observación que la reveló.
-- **2:** se explican problemas concretos, pero sólo uno tiene evidencia vinculada.
-- **0:** se afirma que “se iteró” sin describir problemas observados.
-
-**P3. Decisiones y cambios trazables — 0, 3 o 5 puntos**
-
-- **5:** al menos dos problemas se relacionan explícitamente con una decisión y con el cambio
-  correspondiente en prompt, código, configuración o alcance.
-- **3:** existe una relación completa problema → decisión → cambio.
-- **0:** las decisiones no están conectadas con cambios inspeccionables.
-
-**P4. Verificación del efecto — 0, 2 o 5 puntos**
-
-- **5:** al menos dos cambios tienen comparación antes/después o prueba posterior y resultado.
-- **2:** un cambio tiene verificación posterior identificable.
-- **0:** no se muestra si los cambios mejoraron, empeoraron o mantuvieron el resultado.
-
-**P5. Alcance, supuestos y pendientes — 0, 2 o 5 puntos**
-
-- **5:** se documentan decisiones de alcance o de mantenimiento del alcance, supuestos,
-  limitaciones vigentes y pendientes, cada uno con motivo o impacto cuando corresponda.
-- **2:** se documenta parte de esos elementos, pero falta motivo, impacto o estado.
-- **0:** no se distinguen límites actuales de trabajo futuro.
-
-### 3.2 Topes de la dimensión
-
-- Sin iteraciones distinguibles (`P1 = 0`): máximo **7/25**.
-- Sin vínculo entre decisiones y artefactos (`P3 = 0`): máximo **10/25**.
-- Narrativa incompatible con los artefactos y sin resolución: máximo **12/25**.
-
-Niveles: Excelente 23–25; Bueno 18–22; Básico 10–17; Insuficiente 1–9; Ausente 0.
-
-**Ejemplo alto (25):** tres versiones enlazadas muestran una salida inconsistente, el cambio de
-formato que la corrige y una prueba posterior; otra iteración documenta alucinación ante datos
-faltantes, añade abstención y conserva el antes/después. También registra límites pendientes.
-
-**Ejemplo bajo (2–7):** `DECISIONES.md` dice “iteramos hasta obtener el resultado final”, pero
-no identifica versiones, fallas, cambios ni verificaciones. Varios commits cosméticos no elevan
-el puntaje por sí solos.
+**Buena práctica diferenciadora:** comparaciones antes/después o pruebas posteriores fortalecen los niveles altos, pero no se exige un número arbitrario de iteraciones.
 
 ---
 
-## 4. Dimensión 3 — Formato y reproducibilidad (15 puntos)
+## Dimensión 3 — Formato y reproducibilidad: estructura obligatoria respetada, corridas reconstruibles
 
-**Definición operacional:** un tercero puede localizar los componentes, reconstruir el entorno y
-repetir las corridas con las mismas entradas y parámetros, obteniendo una salida evaluable bajo
-el mismo criterio, aunque no sea textualmente idéntica.
+**Peso: 15 puntos**
 
-### 4.1 Subcriterios
+Evalúa el respeto de la estructura obligatoria y si un tercero puede reconstruir una corrida a partir de la evidencia disponible en el repositorio.
 
-**R1. Estructura y navegación — 0, 1 o 3 puntos**
+| Nivel | Evidencia exigida                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Ejemplo                                                                                                                                                                                                                                                                                                     |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0%    | No hay evidencia de que se respete la estructura requerida ni información suficiente para reconstruir una corrida.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Los archivos están dispersos y no puede identificarse qué entrada, configuración o salida corresponde a una ejecución.                                                                                                                                                                                      |
+| 25%   | Hay evidencia suficiente de uno de los dos componentes: estructura obligatoria o corrida reconstruible. El otro está ausente o no puede verificarse.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | El repositorio respeta la estructura requerida, pero las corridas no incluyen información suficiente para relacionar entrada y salida.                                                                                                                                                                      |
+| 50%   | Ambos componentes están presentes de manera parcial. Se considera una corrida parcialmente reconstruible cuando al menos pueden relacionarse la entrada y la salida, aunque falten configuración relevante, contexto de ejecución o pasos necesarios. La estructura principal puede identificarse, pero todavía faltan elementos para reconstruir completamente la ejecución.                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Hay una corrida con entrada y salida vinculadas, pero no queda identificada la configuración relevante ni el contexto necesario para entender cómo se produjo.                                                                                                                                              |
+| 75%   | La estructura obligatoria está respetada y al menos una corrida utilizada como evidencia del funcionamiento o evaluación del sistema puede reconstruirse con información contenida en el repositorio. Pueden relacionarse entrada, salida y la configuración o contexto que pueda modificar materialmente el resultado o sea necesario para identificar cómo se produjo la corrida. La corrida debe estar vinculada al contrato, configuración o versión identificable del sistema.                                                                                                                                                                                                                                                                                                                                                              | Un tercero puede seguir una corrida asociada a la versión vigente del agente, identificando entrada, configuración relevante y resultado, aunque deba reunir información desde varios archivos.                                                                                                             |
+| 100%  | La estructura obligatoria está respetada y las corridas relevantes son reconstruibles de forma clara y consistente. Se consideran relevantes las corridas utilizadas para demostrar funcionamiento, evaluar el sistema o sustentar otros criterios de la rúbrica. Para ellas pueden identificarse entrada, contrato o versión aplicable, configuración o parámetros materialmente relevantes, pasos necesarios y salida asociada. Sólo se exigen dependencias o condiciones de entorno cuando son necesarias para repetir o interpretar la ejecución. Si existe una reproducción, utiliza el mismo contrato o versión identificada, la misma entrada y los parámetros materialmente relevantes, salvo diferencias explícitamente declaradas y justificadas. La documentación técnica irrelevante no compensa la ausencia de información crítica. | El repositorio permite identificar qué versión del agente se ejecutó, con qué entrada y configuración relevante, qué pasos seguir y qué resultado se obtuvo; una tercera persona puede repetir el flujo bajo condiciones comparables y evaluar si obtiene un resultado equivalente en términos funcionales. |
 
-- **3:** README, prompts/contrato, corridas y decisiones existen y el README enlaza o explica
-  inequívocamente su ubicación.
-- **1:** los componentes existen, pero uno requiere búsqueda o usa un equivalente no explicado.
-- **0:** faltan dos o más componentes o no puede identificarse cuál está vigente.
+**Criterio de configuración relevante:** cuenta como relevante la información que puede modificar materialmente el resultado o que es necesaria para identificar cómo se produjo la corrida.
 
-**R2. Instrucciones y dependencias — 0, 2 o 4 puntos**
-
-- **4:** se especifican pasos ejecutables, dependencias/versiones, variables necesarias sin
-  exponer secretos y preparación de datos.
-- **2:** el flujo general puede reconstruirse, pero falta una versión, dependencia o paso menor.
-- **0:** faltan instrucciones indispensables o requieren conocimiento no documentado.
-
-**R3. Registro de corridas — 0, 2 o 4 puntos**
-
-- **4:** hay al menos tres corridas independientes, cada una con identificador/fecha, entrada o
-  referencia inmutable, salida cruda y resultado/estado.
-- **2:** hay dos corridas completas, o tres con un campo obligatorio ausente en alguna.
-- **0:** hay menos de dos corridas reconstruibles.
-
-**R4. Configuración de ejecución — 0, 1 o 2 puntos**
-
-- **2:** cada corrida identifica modelo/versión y los parámetros que pueden afectar el resultado;
-  si una plataforma no expone un dato, se registra como `NO_DISPONIBLE`.
-- **1:** se identifica modelo, pero faltan parámetros relevantes.
-- **0:** no puede saberse con qué configuración se generaron las salidas.
-
-**R5. Criterio de reproducción — 0, 1 o 2 puntos**
-
-- **2:** se define qué campos, propiedades o métricas deben mantenerse y la tolerancia admitida;
-  al menos una reproducción se compara con ese criterio.
-- **1:** existe criterio objetivo, pero no una reproducción comparada.
-- **0:** “resultado similar/comparable” no está operacionalizado.
-
-### 4.2 Topes de la dimensión
-
-- Menos de dos corridas reconstruibles (`R3 = 0`): máximo **4/15**.
-- Sin instrucciones indispensables (`R2 = 0`): máximo **6/15**.
-- Secretos reales incluidos en archivos o historial: máximo **4/15**, además de marcar
-  `SECRETO_EXPUESTO` y omitir su valor de la devolución.
-
-Niveles: Excelente 14–15; Bueno 11–13; Básico 6–10; Insuficiente 1–5; Ausente 0.
-
-**Ejemplo alto (15):** README navegable, instalación versionada, variables de entorno de ejemplo,
-tres corridas con entradas y salidas crudas, configuración identificada y un criterio que acepta
-variaciones de redacción pero exige campos y totales numéricos iguales dentro de una tolerancia.
-
-**Ejemplo bajo (1–4):** existe un único `resultado.txt` sin entrada, fecha, modelo ni pasos de
-ejecución. El README afirma que cualquiera puede reproducirlo, pero no aporta instrucciones.
+**Buena práctica diferenciadora:** documentar versiones, dependencias y criterios de comparación fortalece la reproducibilidad cuando son necesarios para reconstruir o interpretar la ejecución, pero no se premia documentación técnica decorativa ni se exige que una salida generativa sea textualmente idéntica.
 
 ---
 
-## 5. Dimensión 4 — Análisis económico (15 puntos)
+## Dimensión 4 — Análisis económico: costo por corrida, proyección, elección de modelo justificada
 
-**Definición operacional:** los costos relevantes se calculan con unidades, fuentes y supuestos
-trazables; se proyectan a un volumen definido y la elección de modelo/arquitectura relaciona costo
-con desempeño observado.
+**Peso: 15 puntos**
 
-### 5.1 Subcriterios
+Evalúa si el análisis económico permite entender y reconstruir el costo unitario, su proyección y la decisión de modelo.
 
-**E1. Medición por corrida — 0, 1 o 3 puntos**
+| Nivel | Evidencia exigida                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Ejemplo                                                                                                                                                                                                                                                               |
+| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0%    | No hay evidencia observable de costo por corrida, proyección ni justificación de la elección del modelo.                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Sólo se menciona el modelo utilizado.                                                                                                                                                                                                                                 |
+| 25%   | Hay evidencia verificable de uno de los tres componentes: costo por corrida, proyección o elección de modelo justificada. Un componente cuenta como verificable cuando su valor, lógica o justificación puede reconstruirse a partir de evidencia del repositorio; un número aislado o una afirmación genérica sin método no alcanzan por sí solos.                                                                                                                                                                                                                         | Se informa un costo por corrida con método identificable, pero no existe proyección ni justificación del modelo.                                                                                                                                                      |
+| 50%   | Hay evidencia verificable de al menos dos de los tres componentes y los cálculos o decisiones pueden entenderse parcialmente. Falta uno de los componentes o algún supuesto relevante para reconstruir completamente el análisis.                                                                                                                                                                                                                                                                                                                                           | Se muestra un costo por corrida y una proyección mensual con volumen identificado, pero no se explica por qué el modelo seleccionado resulta adecuado para el sistema.                                                                                                |
+| 75%   | Los tres componentes están presentes y son coherentes entre sí. La proyección deriva del costo unitario mediante un volumen, frecuencia u otro supuesto identificable, y la elección del modelo conecta al menos un criterio económico con requerimientos observables del sistema. Puede quedar implícita alguna fuente o supuesto cuya ausencia no cambie materialmente la conclusión.                                                                                                                                                                                     | Se calcula el costo por corrida, se proyecta con un volumen explícito y se justifica el modelo por costo y capacidad para cumplir la tarea, aunque la fuente de uno de los precios no quede claramente documentada.                                                   |
+| 100%  | Los tres componentes son reconstruibles y consistentes. Se identifican el método y los supuestos relevantes del costo unitario, la lógica de la proyección y la razón de elección del modelo. Se consideran relevantes los supuestos cuya variación podría alterar materialmente el costo proyectado o la conclusión sobre el modelo elegido. La justificación conecta explícitamente costo y requerimientos del sistema. Si se comparan alternativas, se utilizan criterios consistentes y se declaran diferencias relevantes de entradas, precios, volumen o condiciones. | Un tercero puede rehacer el costo unitario, replicar la proyección a partir del volumen documentado y entender por qué el modelo elegido resulta adecuado; si hubo comparación con otra alternativa, las condiciones utilizadas están explicitadas y son comparables. |
 
-- **3:** se registran unidades consumidas por corrida (por ejemplo, tokens de entrada/salida y
-  llamadas a herramientas) obtenidas de logs, API o método reproducible.
-- **1:** se usa una estimación explicada sobre entradas representativas.
-- **0:** no hay medición ni método de estimación.
+**Criterio de coherencia económica:** existe coherencia cuando la proyección deriva del costo por corrida mediante supuestos identificables y la elección del modelo utiliza criterios de costo vinculados con requerimientos observables del sistema.
 
-**E2. Precio y cálculo unitario — 0, 2 o 4 puntos**
+**Criterio de supuestos relevantes:** se consideran relevantes los supuestos cuya variación podría modificar materialmente el costo proyectado o la conclusión sobre la elección del modelo.
 
-- **4:** fuente, fecha, moneda, modelo/servicio y precios por unidad están citados; la fórmula es
-  correcta y separa componentes con tarifas distintas.
-- **2:** el cálculo es reconstruible, pero falta fuente/fecha o un costo menor.
-- **0:** sólo se declara un costo final o el cálculo usa un modelo/precio incompatible.
-
-**E3. Proyección y sensibilidad — 0, 2 o 4 puntos**
-
-- **4:** proyecta volumen por período mostrando fórmula y supuestos, e incluye al menos un
-  escenario alternativo relevante (volumen, longitud, errores, revisión o herramienta).
-- **2:** existe una proyección correcta con fórmula, pero sin sensibilidad.
-- **0:** no hay proyección reconstruible.
-
-**E4. Elección costo-desempeño — 0, 2 o 4 puntos**
-
-- **4:** compara al menos dos opciones bajo las mismas entradas y criterio de éxito, conserva
-  evidencia de resultados y justifica la opción elegida por costo y calidad.
-- **2:** explica la elección con datos parciales o una comparación no completamente controlada.
-- **0:** usa afirmaciones como “más potente” o “más barato” sin evaluación vinculada.
-
-### 5.2 Topes de la dimensión
-
-- Sin cálculo unitario reconstruible (`E2 = 0`): máximo **4/15**.
-- Modelo o servicio costeado distinto del usado, sin reconciliación: máximo **7/15**.
-- Cifras aritméticamente incompatibles con sus propios supuestos: máximo **7/15**.
-
-Niveles: Excelente 14–15; Bueno 11–13; Básico 6–10; Insuficiente 1–5; Ausente 0.
-
-**Ejemplo alto (15):** logs registran tokens por corrida; una fuente fechada aporta tarifas; la
-fórmula separa entrada, salida y herramienta; se proyectan escenarios base y pico; dos modelos se
-comparan con las mismas pruebas y se elige el menor costo que alcanza el umbral de calidad.
-
-**Ejemplo bajo (1–4):** “usamos el modelo X porque es económico” sin consumo, fuente, fórmula,
-volumen ni comparación verificable.
+**Buena práctica diferenciadora:** comparar alternativas bajo condiciones equivalentes fortalece la justificación, pero no es obligatorio si la elección del modelo ya está suficientemente sustentada con evidencia observable.
 
 ---
 
-## 6. Dimensión 5 — Gobierno y riesgo (15 puntos)
+## Dimensión 5 — Gobierno y riesgo: permisos, fallas posibles, supervisión, quién firma
 
-**Definición operacional:** están identificados activos, accesos, fallas relevantes, controles,
-supervisión y responsables; los controles declarados son compatibles con la configuración y con
-el impacto de las acciones del sistema.
+**Peso: 15 puntos**
 
-### 6.1 Subcriterios
+Evalúa permisos, riesgos o fallas relevantes, supervisión humana y responsabilidad final sobre el uso del resultado.
 
-**G1. Sistemas, datos y permisos — 0, 1 o 3 puntos**
+| Nivel | Evidencia exigida                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Ejemplo                                                                                                                                                                                                                                               |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0%    | No hay evidencia observable sobre permisos, fallas posibles, supervisión ni responsable final de aprobación.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | El repositorio describe qué hace el agente, pero no cómo se gobierna ni quién asume responsabilidad por su salida.                                                                                                                                    |
+| 25%   | Hay evidencia verificable de al menos uno de los cuatro componentes requeridos, pero el esquema de gobierno sigue siendo fragmentario.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Se documenta una falla posible, pero no se indican permisos, revisión humana ni responsable de aprobación.                                                                                                                                            |
+| 50%   | Hay evidencia verificable de al menos dos componentes y están definidos de manera concreta. Un componente es concreto cuando identifica el objeto relevante: qué acceso o permiso existe, qué falla puede ocurrir, qué se revisa o qué rol es responsable. El esquema completo de control y responsabilidad aún no puede reconstruirse.                                                                                                                                                                                                                                                                                                            | Se documentan permisos de lectura y una falla concreta, pero no está definido qué revisa una persona ni quién aprueba el resultado.                                                                                                                   |
+| 75%   | Los cuatro componentes están presentes o sólo uno presenta una limitación menor. Se considera limitación menor una deficiencia de detalle o trazabilidad que no impide identificar el componente ni su función dentro del esquema de gobierno. Los permisos, fallas, supervisión y responsabilidad son coherentes entre sí y, cuando existe evidencia técnica, no contradicen la configuración o el comportamiento observable del agente. Puede faltar precisión sobre alguna condición de intervención o relación entre controles.                                                                                                                | El agente tiene permisos documentados, se describen fallas concretas, existe revisión humana y se identifica un responsable, pero no queda completamente definido en qué condición debe intervenir la persona.                                        |
+| 100%  | El repositorio contiene evidencia suficiente y consistente de permisos, fallas o riesgos relevantes, supervisión y accountability final. Puede identificarse qué acceso tiene el agente, qué puede salir mal, qué se revisa, en qué punto o condición interviene una persona y qué rol asume la aprobación final. Para acciones externas que sean irreversibles o tengan consecuencias materiales, la aprobación humana debe ocurrir antes de la acción; para acciones internas y reversibles puede admitirse revisión posterior. La documentación de gobierno es consistente con la configuración, flujo o corridas observables cuando exista esa evidencia. | El repositorio documenta permisos de lectura/escritura, escenarios concretos de falla, qué control se aplica, cuándo interviene una persona y qué rol aprueba el uso final; una acción externa relevante no puede ejecutarse antes de esa aprobación. |
 
-- **3:** presenta un inventario de sistemas y categorías de datos, especifica lectura/escritura, alcance mínimo
-  y mecanismo de credenciales sin revelar secretos; coincide con la implementación observable.
-- **1:** inventario parcial o permisos descritos genéricamente.
-- **0:** no puede determinarse qué accede o las declaraciones contradicen la configuración.
+**Criterio de concreción:** un componente de gobierno se considera concreto cuando identifica explícitamente el objeto relevante: alcance del permiso, escenario de falla, objeto de revisión o rol responsable.
 
-**G2. Riesgos priorizados — 0, 1 o 3 puntos**
+**Criterio de impacto y reversibilidad:** las acciones externas que sean irreversibles o tengan consecuencias materiales requieren aprobación humana previa; las acciones internas y reversibles pueden admitir revisión posterior.
 
-- **3:** documenta al menos dos escenarios relevantes con causa, consecuencia e impacto o
-  prioridad; incluye privacidad/seguridad cuando corresponda.
-- **1:** menciona un escenario concreto, pero sin consecuencia o prioridad.
-- **0:** sólo afirma que “la IA puede equivocarse”.
+**Interpretación de “quién firma”:** se considera cumplido cuando existe un rol humano explícitamente responsable de aprobar o asumir el resultado final; no requiere necesariamente una firma formal.
 
-**G3. Controles y comportamiento seguro — 0, 1 o 3 puntos**
-
-- **3:** cada riesgo prioritario tiene prevención/detección y respuesta; al menos un control es
-  visible en prompt, código, configuración o corrida.
-- **1:** hay mitigaciones documentadas, pero ninguna se comprueba o queda un riesgo prioritario
-  sin respuesta.
-- **0:** no hay mitigaciones accionables o el sistema oculta la falla.
-
-**G4. Supervisión, aprobación y escalamiento — 0, 1 o 3 puntos**
-
-- **3:** define qué revisa la persona, cuándo interviene, qué rol aprueba y cómo se escala una
-  excepción, de modo proporcional al impacto.
-- **1:** menciona revisión humana, pero faltan objeto, disparador, rol o escalamiento.
-- **0:** no hay supervisión para decisiones/acciones relevantes.
-
-**G5. Responsabilidad, auditoría y reversibilidad — 0, 1 o 3 puntos**
-
-- **3:** asigna dueño del sistema y responsable del resultado; conserva trazabilidad suficiente
-  y define reversión/contención cuando la acción puede producir efectos externos.
-- **1:** hay responsables nominales o logs, pero no ambos, o falta reversión cuando corresponde.
-- **0:** nadie asume responsabilidad y no existe trazabilidad mínima.
-
-### 6.2 Topes de la dimensión
-
-- Secretos reales expuestos: máximo **3/15** y marca `SECRETO_EXPUESTO`.
-- Escritura o acción de alto impacto con permisos más amplios que los declarados: máximo **6/15**.
-- Acción irreversible/de alto impacto sin aprobación o mecanismo de contención: máximo **6/15**.
-- Riesgo prioritario observado en una corrida sin control ni escalamiento: máximo **7/15**.
-
-Niveles: Excelente 14–15; Bueno 11–13; Básico 6–10; Insuficiente 1–5; Ausente 0.
-
-**Ejemplo alto (15):** acceso de sólo lectura a datos definidos y escritura limitada a borradores;
-dos fallas priorizadas tienen controles visibles; una persona revisa campos concretos antes de
-publicar; existen dueño, aprobador, logs y procedimiento de reversión.
-
-**Ejemplo bajo (1–4):** “se recomienda revisar porque la IA puede fallar”, sin inventario de
-datos, permisos, escenario de riesgo, control verificable, responsable ni trazabilidad.
-
----
-
-## 7. Reglas transversales contra gaming
-
-El agente debe aplicar estas reglas antes de cerrar el puntaje:
-
-- No premiar capacidades declaradas en README sin EV1–EV3 compatible.
-- No usar documentación de arquitectura como sustituto de funcionamiento observado.
-- No contar como iteraciones cambios cosméticos, commits vacíos o divisiones artificiales de una
-  misma decisión.
-- No contar corridas duplicadas, salidas sin entrada asociada ni ejemplos incluidos en la consigna
-  como pruebas independientes.
-- Contrastar el modelo y los parámetros declarados con configuración/corridas; los costos con ese
-  modelo; los permisos con integraciones; y el formato prometido con las salidas.
-- Si timestamps, hashes, entradas o resultados hacen imposible la narrativa, marcar
-  `EVIDENCIA_INCONSISTENTE`, puntuar con la evidencia válida restante y aplicar el tope que
-  corresponda. La mera sospecha, sin contradicción comprobable, no autoriza una penalización.
-- Ignorar extensión, estética, lenguaje persuasivo y esfuerzo declarado salvo que sean requisitos
-  explícitos de un subcriterio.
-
-## 8. Casos frontera y reglas de desempate
-
-- Si un caso cumple partes de distintos niveles, se puntúa cada subcriterio por separado; nunca se
-  fuerza toda la dimensión a una descripción global.
-- Si queda exactamente entre dos valores permitidos, se asigna el menor salvo que exista evidencia
-  explícita de todos los requisitos del mayor.
-- Un equivalente de archivo o carpeta es aceptable si el README lo mapea inequívocamente.
-- Un historial con *squash* o pocos commits no invalida iteraciones respaldadas por versiones,
-  corridas o comparaciones antes/después.
-- Más artefactos no implican mayor puntaje: se evalúan completitud, diversidad y trazabilidad.
-- Para tareas no deterministas, reproducible significa conservar el criterio de éxito definido,
-  no repetir texto exacto.
-- Si una plataforma no expone un parámetro, `NO_DISPONIBLE` documentado no se trata como omisión;
-  una celda vacía sí.
-
-## 9. Formato mínimo de devolución del evaluador
-
-Por cada dimensión, el agente debe devolver:
-
-```yaml
-dimension: "Nombre"
-subtotal_antes_de_topes: 0
-subcriterios:
-  - id: "S1"
-    puntos: 0
-    evidencia:
-      - tipo: "EV1|EV2|EV3|EV4"
-        ruta: "ruta/archivo"
-        localizador: "líneas, sección, clave o corrida"
-        demuestra: "hecho observado"
-    faltantes: []
-contradicciones: []
-topes_aplicados: []
-puntaje_final: 0
-nivel: "Ausente|Insuficiente|Básico|Bueno|Excelente"
-justificacion: "Síntesis basada en evidencia"
-```
-
-Al final debe incluir `puntaje_total` sobre 100 y una lista de banderas transversales. No debe
-mostrar secretos encontrados; sólo su ubicación y la marca `SECRETO_EXPUESTO`.
-
-## 10. Control aritmético
-
-| Dimensión | Máximo |
-|---|---:|
-| Sistema completo y funcionando | 30 |
-| Proceso documentado | 25 |
-| Formato y reproducibilidad | 15 |
-| Análisis económico | 15 |
-| Gobierno y riesgo | 15 |
-| **Total** | **100** |
-
-No hay redondeos, puntos por prolijidad ni penalizaciones implícitas. Todos los puntos provienen
-de un valor permitido y toda reducción adicional proviene de un tope expresamente documentado.
+**Buena práctica diferenciadora:** vincular permisos, riesgos y controles con configuraciones o corridas observables fortalece el esquema de gobierno y evita controles meramente declarativos.
