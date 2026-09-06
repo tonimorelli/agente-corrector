@@ -38,7 +38,8 @@ ninguna factura sin `prioridad` y `motivo`; cero valores que no estén en el CSV
 
 ## Cómo reproducir una corrida
 
-1. Herramienta usada: **Claude Code** (agente con acceso de lectura a archivos locales).
+1. Herramienta usada: **Claude Code v2.1 (Windows 11)** — agente con acceso de lectura a
+   archivos locales. Sin otras dependencias de software: no requiere instalar paquetes.
    Requiere una cuenta activa; la clave de API se configura como variable de entorno
    `ANTHROPIC_API_KEY` (**nunca** se versiona; este repo no contiene credenciales).
 2. Modelo: `claude-haiku-4-5` (liviano; elección justificada abajo). Parámetros en cada corrida;
