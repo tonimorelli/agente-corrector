@@ -5,7 +5,9 @@
 - **Fecha:** 2026-09-06
 - **System prompt:** `agente/system_prompt.md` de la rama `claude/system-prompt-agente-aollz9` (commit `06a1414`)
 - **Rúbrica:** `rubrica.md` V3 de la rama `claude/rubrica-tipificar-evidencia-pa18h0` (commit `e768ea6`)
-- **Repositorio evaluado:** `casos/flojo/` @ commit `125e7db`
+- **Repositorio evaluado:** `casos/flojo/` — el contenido evaluado es el que subió Tomás García
+  a `main` (commits `f3d23cc`…`2e84975`); verificado por diff idéntico al texto sobre el que
+  corrió esta evaluación (única diferencia: líneas en blanco finales, sin efecto)
 - **Restricciones respetadas:** sin ejecución de código, sin red, solo lectura
 
 ## Salida del agente
