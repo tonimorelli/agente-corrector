@@ -24,7 +24,7 @@ debe autorizar esas acciones durante la corrida y debe dejarlo asentado en el re
 
 - Rúbrica: `rubrica.md`, en la raíz de este repositorio. El agente la lee de ahí en cada corrida.
 - System prompt: `agente/system_prompt.md`.
-- Salidas de las corridas: `casos/<caso>/corridas/`.
+- Salidas de las corridas: `calibracion/`.
 
 ## Parámetros que dependen del operador
 
