@@ -70,15 +70,41 @@ pura interpretación. **Propuesta:** aclarar en §1.1 que un registro completo c
 ejecutable, entrada íntegra y configuración cuenta como EV1 a los efectos de S2/E1, dado que
 la reejecución está vedada al evaluador por diseño.
 
-### H3 — Integración (para Antonio + Leo): dependencia de ramas y ruta de salidas
+### H3 — Integración (para Antonio + Leo): dependencia de ramas y ruta de salidas — **cerrado (8/9)**
 
 1. El system prompt del agente referencia §1.1 (EV1–EV4) que **solo existe en la rúbrica V3 de
    la rama**; con la V2 de `main`, el agente citaría secciones inexistentes. Hay que mergear
    **las dos ramas juntas** (rúbrica V3 + agente) o ninguna.
+   **Resuelto:** los PR #3 (rúbrica V3), #4 (agente) y #5 (casos + calibración) se mergearon en
+   tanda; `main` (`0d54789`) tiene la V3 y el agente juntos, sin ventana de inconsistencia.
 2. `agente/configuracion.md` dice que las salidas de las corridas del evaluador van a
    `casos/<caso>/corridas/`, pero esa carpeta pertenece al **trabajo sintético** (cada caso es
    un trabajo final completo, con sus propias corridas). Mezclarlas contaminaría los casos.
    **Propuesta:** salidas del evaluador → `calibracion/` (como en esta corrida).
+   **Resuelto:** PR #7 de Leo, mergeado en `9c3414d`.
+
+### H3b — Verificación de guardado y formato de salida (Antonio + Leo, 8/9)
+
+Cerrada la ruta, quedaba confirmar que el resultado **se guarda como corresponde**. Dos cosas:
+
+- **Quién escribe.** El agente no escribe archivos: es sólo lectura y su única salida es el
+  bloque delimitado de §9 del system prompt. `agente/configuracion.md` decía "salidas de las
+  corridas: `calibracion/`" sin aclararlo, lo que se podía leer como que el agente guarda solo.
+  Se agregó la sección *Dónde y cómo se guarda el resultado*: guarda el operador, en este
+  repositorio, con nombre `corrida_evaluador_<caso>_<n>.md`, un archivo nuevo por corrida
+  (no se pisa la anterior), con encabezado del operador más la salida cruda pegada textual.
+  Esto también deja resuelto el caso de la prueba de fuego: el repo externo se evalúa sin
+  escribir una línea en él y el registro queda acá.
+- **Qué se guarda.** Se verificaron las cuatro corridas del evaluador guardadas en
+  `calibracion/` contra el checklist de conformidad nuevo: las cuatro cumplen el contrato
+  completo —seis documentos, nombres y orden de dimensiones de §10, campos de §9 más
+  `mejora_prioritaria`, evidencia citada en todo subcriterio con puntos, sin claves inventadas—
+  y la aritmética cierra en las cuatro (98, 100, 23 y 5 sobre 100).
+
+Salvedad de nomenclatura: `calibracion/corrida_evaluador_A1_tres_casos.md` no sigue ese contrato
+porque no es una corrida del evaluador V3, sino el registro comparativo de la prueba A/B con la
+rúbrica A1 (H6). Se deja como está para no romper los links de H6; conviene tenerlo presente en
+el QA final.
 
 ### H4 — Los casos como subcarpetas no tienen historial git propio
 
@@ -119,6 +145,9 @@ pre-registrados y límites del test: [comparacion_rubricas.md](calibracion/compa
 - **6/9 — Rúbrica: el grupo confirmó V3 como la rúbrica ejecutable** tras la prueba A/B (H6).
   La consolidada A1 queda propuesta como resumen legible.
 - **6/9 — Ajuste H1 verificado:** re-corrida completa del caso excelente → 100/100 (corrida 1b).
+- **8/9 — Ruta y formato de salida cerrados (H3, H3b):** las salidas del evaluador se guardan en
+  `calibracion/`, las guarda el operador y quedan sujetas al checklist de conformidad de
+  `agente/configuracion.md`.
 
 ## Pendientes
 
@@ -126,8 +155,8 @@ pre-registrados y límites del test: [comparacion_rubricas.md](calibracion/compa
    la ejecute Tomás desde su herramienta y su cuenta: si usa otro modelo, esa misma corrida
    completa la tabla "Modelos verificados" de `agente/configuracion.md` (¿resiste otro modelo
    los 4 vectores del tramposo?).
-2. **Merge en tanda de los PRs #3 (rúbrica V3), #4 (agente) y #5 (casos + calibración)** —
-   Toni; el agente referencia secciones que solo existen en V3 (H3).
+2. ~~**Merge en tanda de los PRs #3, #4 y #5**~~ — hecho (H3.1). También se mergeó el PR #7
+   con la corrección de ruta de salidas (H3.2) y se cerró la verificación de guardado (H3b).
 3. **Ensayo de la prueba de fuego** antes del jueves: correr el evaluador sobre un repositorio
    externo real que nunca vio (una Entrega 1 o 2), para descubrir sorpresas de estructura
    libre antes de la clase.
