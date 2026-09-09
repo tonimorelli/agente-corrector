@@ -55,7 +55,7 @@
 
 | Orden | Qué hay que hacer | Responsable | Explicación simple |
 |---:|---|---|---|
-| 1 | Revisar e integrar `mateogarcia-calibracion-estabilidad` | Toni + Mateo | Confirmar que sólo incorpora las tres corridas de estabilidad y la actualización de `calibracion.md`, y luego mergearla a `main`. |
+| 1 | Revisar e integrar `mateogarcia-calibracion-estabilidad` | Toni | Revisar el branch de estabilidad de Mateo y mergearlo a main. |
 | 2 | Revisar y mergear PR #8 | Toni + Leo | Incorporar la documentación final sobre cómo se guardan las salidas del evaluador. |
 | 3 | Cerrar H2 con una prueba mínima dirigida | Andrea + Ignacio | Ejecutar sólo una comparación específica main vs. H2. No repetir las 12 evaluaciones anteriores. |
 | 4 | Decidir el cierre de H2 | Andrea + Ignacio | Si la prueba demuestra una mejora específica, proponer incorporación. Si no, documentar que H2 no se incorpora. |
