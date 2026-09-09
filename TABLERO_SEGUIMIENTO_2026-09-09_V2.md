@@ -115,8 +115,8 @@ Los pendientes son de cierre:
 
 | Orden | Prioridad | Acción | Responsable | Explicación simple |
 |---:|---|---|---|---|
-| 1 | 🔴 P0 | Ejecutar prueba externa | Antonio + Leo | Correr el agente sobre una Entrega 1 o 2 real que no haya sido construida por el grupo y guardar el resultado. |
-| 2 | 🔴 P0 | Revisar e integrar H2 | Toni + Andrea + Ignacio | Revisar la branch `andreavergara-h2-ev1-ev3` y, si no hay observaciones, incorporarla a `main`. |
+| 1 | 🔴 P0 | Ejecutar prueba externa | Mateo | Correr el agente sobre una Entrega 1 o 2 real que no haya sido construida por el grupo y guardar el resultado. |
+| 2 | 🔴 P0 | Revisar e integrar H2 | Toni + Andrea | Revisar la branch `andreavergara-h2-ev1-ev3` y, si no hay observaciones, incorporarla a `main`. |
 | 3 | 🔴 P0 | Revisar branch QA | Andrea + Toni | Revisar `andreavergara-qa-consigna` e integrar README, QA y documentación necesaria. |
 | 4 | 🟡 P1 | Corregir QA | Andrea | Revisar la inconsistencia del resumen: actualmente los totales declarados deben verificarse antes del merge. |
 | 5 | 🟡 P1 | Documentar incidente sandbox | Andrea / Antonio | Dejar una nota breve explicando `RUBRICA_NO_DISPONIBLE`, causa y solución aplicada. |
