@@ -153,12 +153,24 @@ completaría la tabla "Modelos verificados" de `agente/configuracion.md`.
   mismos niveles, puntos y detecciones; única diferencia (+1 en flojo) atribuible al cambio de
   rúbrica `4552ff2`, documentada arriba.
 
+## Ensayo de la prueba de fuego (9/9) — repo externo real
+
+Hecho: el evaluador (todo desde `main`, `0dce76f`) corrió sobre un repositorio externo real
+que nunca vio — el trabajo final `mateogp997/eventos-redline` (@ `02848e9`), con estructura
+propia: frontend ejecutable, datos versionados y corridas con convención de nombres distinta.
+Registro completo: [ensayo_prueba_fuego_eventos_redline.md](calibracion/ensayo_prueba_fuego_eventos_redline.md).
+
+- **El evaluador funcionó sobre estructura ajena**: inventarió, mapeó equivalencias por el
+  README y puntuó las 5 dimensiones con evidencia citada. No ejecutó el código presente en el
+  repo (límites respetados) y registró faltantes sin alterar puntajes que la rúbrica no exige
+  bajar. Resultado: 100/100, sin topes ni banderas.
+- **Conflicto de interés declarado**: el repo evaluado es del operador de la corrida (Mateo).
+  El ensayo valida el *funcionamiento* sobre estructura externa, no calibra la nota; cualquier
+  integrante puede replicarlo con su herramienta.
+
 ## Pendientes
 
-1. **Ensayo de la prueba de fuego** antes del jueves: correr el evaluador sobre un repositorio
-   externo real que nunca vio (una Entrega 1 o 2), para descubrir sorpresas de estructura
-   libre antes de la clase.
-2. **Verificación cruzada opcional:** que otro integrante repita una corrida con otra
-   herramienta/modelo para completar la tabla "Modelos verificados" de `agente/configuracion.md`
-   (¿resiste otro modelo los 4 vectores del tramposo?).
-3. Decisión de Dupla 1 sobre la aclaración de texto propuesta en H2 (EV1 vs. EV3).
+1. **Verificación cruzada opcional:** que otro integrante repita una corrida (de un caso o del
+   ensayo) con otra herramienta/modelo para completar la tabla "Modelos verificados" de
+   `agente/configuracion.md` (¿resiste otro modelo los 4 vectores del tramposo?).
+2. Decisión de Dupla 1 sobre la aclaración de texto propuesta en H2 (EV1 vs. EV3).
