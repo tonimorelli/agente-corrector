@@ -102,8 +102,8 @@ necesario reejecutar ninguna corrida:** `corrida_evaluador_excelente_1b_postajus
 `corrida_evaluador_flojo_2.md` registra `S2 = 3` (`EV3`, *"sin configuración"*) y `E1 = 0`
 (*"sin medición ni método"*). Las tablas de resultados de este documento quedan sin cambios.
 
-**Estado:** incorporado a `rubrica.md` en la rama `andreavergara-h2-ev1-ev3`, con el OK de
-Ignacio. Pendiente de PR e integración a `main` por Antonio.
+**Estado:** cerrado. La regla está incorporada a `rubrica.md` con el OK de Ignacio;
+integración a `main` por el [PR #10](https://github.com/tonimorelli/agente-corrector/pull/10).
 
 ### H3 — Integración (para Antonio + Leo): dependencia de ramas y ruta de salidas
 
@@ -200,5 +200,5 @@ completaría la tabla "Modelos verificados" de `agente/configuracion.md`.
    herramienta/modelo para completar la tabla "Modelos verificados" de `agente/configuracion.md`
    (¿resiste otro modelo los 4 vectores del tramposo?).
 3. ~~Decisión de Dupla 1 sobre la aclaración de texto propuesta en H2 (EV1 vs. EV3)~~ — cerrada
-   el 9/9: la regla se incorporó a `rubrica.md` tras las dos pruebas dirigidas. Queda el PR y la
-   integración a `main`.
+   el 9/9: la regla se incorporó a `rubrica.md` tras las dos pruebas dirigidas; integración a
+   `main` por el [PR #10](https://github.com/tonimorelli/agente-corrector/pull/10).
