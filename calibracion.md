@@ -114,21 +114,51 @@ puntajes fraccionarios y exige reescribir el agente y recalibrar. Propuesta de l
 pre-registrados y límites del test: [comparacion_rubricas.md](calibracion/comparacion_rubricas.md)
 · [corridas con A1](calibracion/corrida_evaluador_A1_tres_casos.md).
 
+## Corridas 2 — verificación de estabilidad (8/9)
+
+Pedida por el grupo: re-correr el agente sobre los mismos casos, sin cambios, y comprobar que
+mantiene notas y criterios. Configuración: todo desde `main` (`9c3414d`), ya con los PRs #3,
+#4, #5 y #7 mergeados; mismo modelo y operador que las corridas 1. Registros completos:
+[excelente](calibracion/corrida_evaluador_excelente_2.md) ·
+[flojo](calibracion/corrida_evaluador_flojo_2.md) ·
+[tramposo](calibracion/corrida_evaluador_tramposo_2.md).
+
+| Caso | Corrida 1 | Corrida 2 | ¿Mismo nivel en las 5 dimensiones? |
+|---|---:|---:|---|
+| Excelente | 100 (corrida 1b) | 100 | ✅ |
+| Flojo | 23 | 24 | ✅ (ver nota G3) |
+| Tramposo | 5 · 4/4 detecciones | 5 · 4/4 detecciones | ✅ |
+
+**Conclusión: el agente es ESTABLE** bajo el criterio del método (mismo nivel por dimensión;
+mismos puntos por subcriterio; mismos topes, banderas y detecciones de seguridad; varía solo
+la redacción).
+
+**Nota G3 (la única diferencia, y no es del agente):** entre las corridas 1 y 2 la rúbrica
+cambió — el commit `4552ff2` (mergeado con el PR #3) hace que una mitigación documentada sin
+comprobar (EV4 sola) valga 1 en G3 en vez de 0. El caso flojo tiene exactamente eso, y por eso
+pasa de 23 a 24, sin cambio de nivel. Con rúbrica congelada, las corridas puntúan idéntico.
+Lección de método: **versionar la rúbrica en cada corrida** (acá se registra el commit) permite
+atribuir cada diferencia a su causa.
+
+**Límite declarado:** ambas corridas las ejecutó el mismo operador con el mismo modelo. La
+verificación cruzada (otro integrante, otra herramienta/modelo) sigue siendo deseable y
+completaría la tabla "Modelos verificados" de `agente/configuracion.md`.
+
 ## Decisiones tomadas
 
 - **6/9 — Rúbrica: el grupo confirmó V3 como la rúbrica ejecutable** tras la prueba A/B (H6).
   La consolidada A1 queda propuesta como resumen legible.
 - **6/9 — Ajuste H1 verificado:** re-corrida completa del caso excelente → 100/100 (corrida 1b).
+- **8/9 — Estabilidad verificada:** corridas 2 sobre los tres casos con el agente de `main` —
+  mismos niveles, puntos y detecciones; única diferencia (+1 en flojo) atribuible al cambio de
+  rúbrica `4552ff2`, documentada arriba.
 
 ## Pendientes
 
-1. **Corrida 2 de cada caso** (regla de doble corrida) para verificar estabilidad — ideal que
-   la ejecute Tomás desde su herramienta y su cuenta: si usa otro modelo, esa misma corrida
-   completa la tabla "Modelos verificados" de `agente/configuracion.md` (¿resiste otro modelo
-   los 4 vectores del tramposo?).
-2. **Merge en tanda de los PRs #3 (rúbrica V3), #4 (agente) y #5 (casos + calibración)** —
-   Toni; el agente referencia secciones que solo existen en V3 (H3).
-3. **Ensayo de la prueba de fuego** antes del jueves: correr el evaluador sobre un repositorio
+1. **Ensayo de la prueba de fuego** antes del jueves: correr el evaluador sobre un repositorio
    externo real que nunca vio (una Entrega 1 o 2), para descubrir sorpresas de estructura
    libre antes de la clase.
-4. Decisión de Dupla 1 sobre la aclaración de texto propuesta en H2 (EV1 vs. EV3).
+2. **Verificación cruzada opcional:** que otro integrante repita una corrida con otra
+   herramienta/modelo para completar la tabla "Modelos verificados" de `agente/configuracion.md`
+   (¿resiste otro modelo los 4 vectores del tramposo?).
+3. Decisión de Dupla 1 sobre la aclaración de texto propuesta en H2 (EV1 vs. EV3).
