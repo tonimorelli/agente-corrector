@@ -58,17 +58,52 @@ y Antonio y Leo (agente).
   banderas ([corrida 1b](calibracion/corrida_evaluador_excelente_1b_postajuste.md)).
 - **Lección:** la regla "ante empate, el menor valor" funciona — el evaluador no regala puntos.
 
-### H2 — Rúbrica (para Andrea + Ignacio): clasificación EV1 vs. EV3 de corridas conservadas
+### H2 — Rúbrica (Andrea + Ignacio): clasificación EV1 vs. EV3 de corridas conservadas — **cerrado (9/9)**
 
-Un registro de corrida completo (entrada + salida cruda + fecha + configuración) que el
-evaluador **no puede reejecutar** (tiene prohibido ejecutar) queda a mitad de camino entre
-EV1 ("idealmente reejecución") y EV3 ("registro conservado"). Afecta dos subcriterios donde el
-valor máximo exige EV1/EV2: **S2 = 8** y **E1 = 3**. En la corrida 1 lo tratamos como EV1
-(el prompt es el artefacto ejecutable y el registro relaciona entrada→salida→config); otro
-operador podría tratarlo como EV3 y bajar S2 a 6 y E1 a 1 — una diferencia de 4 puntos por
-pura interpretación. **Propuesta:** aclarar en §1.1 que un registro completo con prompt
-ejecutable, entrada íntegra y configuración cuenta como EV1 a los efectos de S2/E1, dado que
-la reejecución está vedada al evaluador por diseño.
+**El problema.** Un registro de corrida completo (prompt + entrada + salida cruda + fecha +
+configuración) que el evaluador **no puede reejecutar** (tiene prohibido ejecutar) encaja a la
+vez en la definición de EV1 ("idealmente reejecución") y en la de EV3 ("registro conservado…
+aunque el evaluador no pueda reejecutarlo"). Afecta los dos subcriterios cuyo valor máximo exige
+EV1/EV2: **S2** (0/3/6/8) y **E1** (0/1/3).
+
+**Corrección de una imprecisión de la redacción anterior.** Esta entrada afirmaba que tratar el
+registro como EV3 "baja S2 a 6 y E1 a 1". Eso vale **sólo para el caso excelente**, donde el
+resto de los requisitos de esos subcriterios está satisfecho y la clasificación EV1/EV3 es la
+única variable. En general **EV3 es un techo, no un puntaje**: impide S2 = 8 y E1 = 3, y el valor
+que finalmente queda depende de qué otros requisitos cumpla el caso.
+
+**Regla incorporada** (`rubrica.md` §1.1, *Regla operativa EV1–EV3*): cuando la reejecución esté
+impedida por el entorno del evaluador, un registro que vincule inequívocamente artefacto
+ejecutable/prompt, entrada íntegra, configuración, salida cruda y resultado **se considera**
+equivalente a EV1 exclusivamente a efectos de S2 y E1; si falta alguno de esos cinco elementos o
+su vinculación inequívoca, **debe** tratarse como EV3. La equivalencia no altera la clasificación
+en ningún otro subcriterio. El verbo es "se considera" y no "puede considerarse" a propósito: con
+"puede", la aplicación de la equivalencia quedaba a criterio del evaluador y reabría la misma
+variación que la regla busca cerrar.
+
+#### Pruebas dirigidas (9/9)
+
+Dos pruebas acotadas a S2 y E1, una por cada dirección de la regla. No se reejecutó ninguna
+corrida: se aplicaron ambas versiones de la rúbrica sobre los registros ya conservados.
+
+| Prueba | Caso | Sin la regla (`main`) | Con la regla | Resultado |
+|---|---|---|---|---|
+| 1 — registro completo | `casos/excelente/` (corridas 1 y 2: prompt citado, CSV íntegro, modelo y fecha, salida cruda, verificación contra el criterio de éxito) | Oscila: lectura EV1 → S2 = 8 / E1 = 3; lectura EV3 → S2 = 6 / E1 = 1. **4 puntos por pura interpretación** | Los cinco elementos presentes → EV1 obligatorio → **S2 = 8 · E1 = 3** | La regla **fija** el valor alto y elimina la oscilación |
+| 2 — registro incompleto | `casos/flojo/` (corrida 1 sin entrada: *"no guardé los comentarios"*; corrida 2 sin configuración: *"no anoté qué modelo"*; ninguna cita qué prompt de los dos usó; sin criterio de éxito definido) | — | Faltan tres de los cinco elementos → EV3 obligatorio → **S2 = 3 · E1 = 0** | La regla **no admite** lectura generosa; el caso además cae por debajo de 6/1 por requisitos propios de cada subcriterio |
+
+En la prueba 2, S2 queda en 3 (no en 6) porque el valor 6 exige además "satisface el criterio de
+éxito definido" y el caso flojo nunca define uno; E1 queda en 0 (no en 1) porque el valor 1 exige
+"una estimación explicada" y el caso sólo declara una suscripción de USD 20/mes, que no es
+medición ni método.
+
+**Los puntajes ya registrados coinciden con lo que produce la regla final, de modo que no fue
+necesario reejecutar ninguna corrida:** `corrida_evaluador_excelente_1b_postajuste.md` y
+`corrida_evaluador_excelente_2.md` registran `S2 = 8` y `E1 = 3` con evidencia tipificada `EV1`;
+`corrida_evaluador_flojo_2.md` registra `S2 = 3` (`EV3`, *"sin configuración"*) y `E1 = 0`
+(*"sin medición ni método"*). Las tablas de resultados de este documento quedan sin cambios.
+
+**Estado:** incorporado a `rubrica.md` en la rama `andreavergara-h2-ev1-ev3`, con el OK de
+Ignacio. Pendiente de PR e integración a `main` por Antonio.
 
 ### H3 — Integración (para Antonio + Leo): dependencia de ramas y ruta de salidas
 
@@ -152,6 +187,9 @@ completaría la tabla "Modelos verificados" de `agente/configuracion.md`.
 - **8/9 — Estabilidad verificada:** corridas 2 sobre los tres casos con el agente de `main` —
   mismos niveles, puntos y detecciones; única diferencia (+1 en flojo) atribuible al cambio de
   rúbrica `4552ff2`, documentada arriba.
+- **9/9 — H2 incorporado** tras las dos pruebas dirigidas (ver H2): la regla operativa EV1–EV3
+  entra en `rubrica.md` §1.1 con el verbo "se considera". Sin reejecutar corridas: los puntajes
+  ya registrados coinciden con los que produce la regla.
 
 ## Pendientes
 
@@ -161,4 +199,6 @@ completaría la tabla "Modelos verificados" de `agente/configuracion.md`.
 2. **Verificación cruzada opcional:** que otro integrante repita una corrida con otra
    herramienta/modelo para completar la tabla "Modelos verificados" de `agente/configuracion.md`
    (¿resiste otro modelo los 4 vectores del tramposo?).
-3. Decisión de Dupla 1 sobre la aclaración de texto propuesta en H2 (EV1 vs. EV3).
+3. ~~Decisión de Dupla 1 sobre la aclaración de texto propuesta en H2 (EV1 vs. EV3)~~ — cerrada
+   el 9/9: la regla se incorporó a `rubrica.md` tras las dos pruebas dirigidas. Queda el PR y la
+   integración a `main`.

@@ -1,10 +1,5 @@
 # Rúbrica ejecutable del Trabajo Final
 
-> **Versión candidata — H2:** aclara la clasificación EV1–EV3 de corridas conservadas,
-> cuya interpretación puede producir una variación de hasta 4 puntos según `calibracion.md`.
-> El cambio busca unificar la clasificación cuando el entorno del evaluador impide reejecutar.
-> Esta versión requiere validación empírica antes de proponerse para merge.
-
 Responsables: Andrea Vergara e Ignacio Monteserin (Dupla A).
 
 > **Nota de versión:** esta es la segunda versión de la rúbrica ejecutable, elaborada a partir de
@@ -45,7 +40,7 @@ Una declaración EV4 puede probar decisiones, responsables o supuestos, pero **n
 sola** que el sistema funciona, que una herramienta fue invocada, que una prueba ocurrió, que
 un costo fue medido o que un control está implementado.
 
-**Regla operativa EV1–EV3:** cuando la reejecución esté impedida por el entorno del evaluador, un registro completo que vincule inequívocamente artefacto ejecutable/prompt, entrada íntegra, configuración, salida cruda y resultado puede considerarse equivalente a EV1 exclusivamente a efectos de S2 y E1. Esta equivalencia excepcional no modifica ni restringe la clasificación que corresponda aplicar en otros subcriterios conforme a la definición general de EV1–EV4. Si falta alguno de esos elementos o su vinculación inequívoca, el registro debe tratarse como EV3. Una restricción del entorno del evaluador no debe degradar por sí sola la evidencia aportada por el trabajo.
+**Regla operativa EV1–EV3:** cuando la reejecución esté impedida por el entorno del evaluador, un registro completo que vincule inequívocamente artefacto ejecutable/prompt, entrada íntegra, configuración, salida cruda y resultado se considera equivalente a EV1 exclusivamente a efectos de S2 y E1. Esta equivalencia excepcional no modifica ni restringe la clasificación que corresponda aplicar en otros subcriterios conforme a la definición general de EV1–EV4. Si falta alguno de esos elementos o su vinculación inequívoca, el registro debe tratarse como EV3. Una restricción del entorno del evaluador no debe degradar por sí sola la evidencia aportada por el trabajo.
 
 ### 1.2 Reglas de evidencia y contradicción
 
