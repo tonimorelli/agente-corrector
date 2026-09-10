@@ -1,11 +1,10 @@
-# QA V2 de precierre — Consigna del parcial
+# QA final — Consigna del parcial
 
 Comparación punto por punto entre lo que pide la consigna del parcial
 (`docs/parcial_agente_evaluador.pdf`) y lo que existe hoy en el repositorio.
 
-- **Corte:** 10/9/2026 · `andreavergara-qa-consigna` en `9ff4396`, con `origin/main`
-  (`017065e`) integrado mediante `61689ad`: PR #10 (H2), PR #11 (ensayo externo),
-  calibración, estabilidad y README actualizado.
+- **Corte:** 10/9/2026 · `main` en `1af5e91`, con H2, ensayo externo,
+  calibración, estabilidad, README y cierre de D2 integrados.
 - **Estados:** **CUMPLE** · **PARCIAL** (existe pero incompleto o sin validar) · **NO CUMPLE**.
 - **Fuente de los pesos de corrección:** tabla "Cómo se evalúa el parcial" de la consigna
   (Rúbrica 25 · Agente 25 · Casos 20 · Calibración 15 · Proceso grupal 15).
@@ -97,7 +96,7 @@ funcionamiento; no sustituye la comparación humano–agente sobre los tres caso
 | Ítem | Qué pide | Evidencia | Estado |
 |---|---|---|---|
 | B1 | Repositorio público de GitHub por grupo | `github.com/tonimorelli/agente-corrector`, accesible sin autenticación | CUMPLE |
-| B2 | `README.md` — README estándar de la materia + integrantes | `README.md` con materia/programa/profesor/entrega, "qué es", tabla de 6 integrantes **con roles**, estructura y "cómo correr el agente" | CUMPLE — versión del 10/9/2026 (`9ff4396`), roles contrastados con evidencia; lista para integración |
+| B2 | `README.md` — README estándar de la materia + integrantes | `README.md` con materia/programa/profesor/entrega, "qué es", tabla de 6 integrantes **con roles**, estructura y "cómo correr el agente" | CUMPLE — versión del 10/9/2026 (`9ff4396`), roles contrastados con evidencia; integrada en `main` |
 | B3 | `rubrica.md` — la rúbrica ejecutable | `rubrica.md` (V3) en la raíz | CUMPLE |
 | B4 | `agente/` — system prompt y configuración del corrector | `agente/system_prompt.md` + `agente/configuracion.md` | CUMPLE |
 | B5 | `casos/excelente/`, `casos/flojo/`, `casos/tramposo/` | Las tres carpetas con contenido | CUMPLE |
@@ -117,7 +116,7 @@ agente corrector.
 | C2 | Iteraciones de la rúbrica registradas | `rubrica.md` "Nota de versión: segunda versión"; tipificación EV1–EV4; A/B V3 vs A1 (`calibracion.md` H6); regla H2 incorporada por PR #10; `DECISIONES.md` de cada caso | CUMPLE |
 | C3 | Decisiones registradas | `calibracion.md` "Decisiones tomadas" (fechadas); `casos/*/DECISIONES.md`; tableros de seguimiento en la rama `andreavergara-seguimiento` | CUMPLE |
 
-*Actualización V2:* H2 y el ensayo externo ya están integrados. La comparación V3/A1 queda
+*Estado final:* H2 y el ensayo externo ya están integrados. La comparación V3/A1 queda
 conservada en `calibracion/comparacion_rubricas.md` y
 `calibracion/corrida_evaluador_A1_tres_casos.md`; A1 no es un pendiente ni un entregable adicional.
 
@@ -136,7 +135,7 @@ conservada en `calibracion/comparacion_rubricas.md` y
 
 | Ítem | Qué pide | Evidencia | Estado |
 |---|---|---|---|
-| E1 | Un integrante sube el link al repo en la actividad *Parcial* del campus antes del jue 10/9 18:59 | README listo en esta rama; H2 y ensayo externo integrados. No hay confirmación humana de la subida del enlace al campus | PARCIAL — pendiente de confirmación humana |
+| E1 | Un integrante sube el link al repo en la actividad *Parcial* del campus antes del jue 10/9 18:59 | README integrado en `main`; H2 y ensayo externo integrados. No hay confirmación humana de la subida del enlace al campus | PARCIAL — pendiente de confirmación humana |
 | E2 | Preparación para la prueba de fuego en vivo: el agente corrige casos que **nunca vio** | `calibracion.md`, "Ensayo de la prueba de fuego (9/9)", y `calibracion/ensayo_prueba_fuego_eventos_redline.md`: `mateogp997/eventos-redline` en `02848e9`, cinco dimensiones, salida completa y límites respetados; integrado por [PR #11](https://github.com/tonimorelli/agente-corrector/pull/11) (`017065e`) | CUMPLE — ensayo externo de precierre; no acredita la actividad en vivo |
 
 ---
@@ -170,7 +169,7 @@ agente distingue correctamente su presencia (excelente 15/15) de su ausencia (fl
 - **Calibración por bandas:** CUMPLE con el método y los desacuerdos documentados. La tabla
   adicional de la guía operativa no es una exigencia de la consigna; no queda como gap.
 - **H2 y cierres de integración:** H2 **CERRADO** e integrado por PR #10; estabilidad y
-  ensayo externo integrados. README del 10/9 listo para integración con esta QA V2.
+  ensayo externo integrados. README del 10/9 y cierre de D2 integrados en `main`.
 
 ### D2: CUMPLE — incidente de lectura resuelto
 
@@ -182,7 +181,6 @@ no se modificó la rúbrica para resolver el problema de acceso.
 
 ## Pendientes reales antes de congelar main
 
-1. Revisar y aprobar humanamente esta QA V2; integrar la rama con README/docs/QA y comprobar
-   que el contenido aprobado quede en el commit final de entrega. Identificar ese SHA.
+1. Revisar y aprobar humanamente esta QA final. Identificar el SHA final de entrega.
 2. Confirmar con el integrante responsable la subida del enlace al campus antes del
    10/9 a las 18:59; E1 sigue pendiente hasta esa confirmación.
