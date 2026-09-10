@@ -105,6 +105,16 @@ necesario reejecutar ninguna corrida:** `corrida_evaluador_excelente_1b_postajus
 **Estado:** cerrado. La regla está incorporada a `rubrica.md` con el OK de Ignacio;
 integración a `main` por el [PR #10](https://github.com/tonimorelli/agente-corrector/pull/10).
 
+#### Incidente de lectura durante la validación de H2 — resuelto
+
+Durante la validación de H2, el evaluador devolvió inicialmente `RUBRICA_NO_DISPONIBLE`,
+aunque `rubrica.md` existía. Se diagnosticó que el sandbox impedía acceder a los archivos
+requeridos y se identificó la configuración faltante. Se reintentó con
+`--sandbox read-only -c windows.sandbox="elevated"`; tras ese ajuste, el evaluador pudo
+leer la rúbrica y completar la validación. No se modificó la rúbrica para resolver el
+problema. El incidente documenta el diagnóstico y la corrección de la herramienta/configuración
+ante una limitación de acceso, en lugar de abandonar la evaluación.
+
 ### H3 — Integración (para Antonio + Leo): dependencia de ramas y ruta de salidas
 
 1. El system prompt del agente referencia §1.1 (EV1–EV4) que **solo existe en la rúbrica V3 de
