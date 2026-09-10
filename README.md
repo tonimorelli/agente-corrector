@@ -12,7 +12,7 @@ El parcial de la materia es construir un **agente evaluador**: un sistema capaz 
 trabajos finales de la cursada. Este repositorio contiene ese agente y la evidencia de que
 funciona.
 
-El agente aplica una **rúbrica ejecutable**: las cinco dimensiones de la rúbrica oficial del
+El agente aplica la **rúbrica ejecutable V3**: las cinco dimensiones de la rúbrica oficial del
 trabajo final (con sus pesos) traducidas a criterios explícitos, con escalas por nivel y la
 evidencia que exige cada puntaje. Recibe el repositorio de un trabajo final y devuelve, por cada
 dimensión, un puntaje, la justificación de ese puntaje citando evidencia del trabajo, y una
@@ -23,12 +23,12 @@ corrida.
 
 | Nombre | Rol |
 | --- | --- |
-| Andrea Vergara | Coordinación general y seguimiento · revisión de la rúbrica (stress test de ambigüedad y gaming) |
-| Antonio Morelli | Repo Owner · diseño del system prompt del agente · integración a `main` |
-| Ignacio Monteserin | Arquitectura de la rúbrica ejecutable (escalas por dimensión) |
-| Leo Bordeira | Robustez del system prompt · pruebas de prompt injection |
-| Mateo García | Casos de prueba (excelente, flojo, tramposo) |
-| Tomás García | Ejecución del corrector · calibración humano vs. agente · pruebas de estabilidad |
+| Andrea Vergara | Coordinación y seguimiento · revisión de rúbrica y cierre de H2 |
+| Antonio Morelli | Gestión del repositorio · system prompt e integración |
+| Ignacio Monteserin | Diseño y revisión de la rúbrica ejecutable |
+| Leo Bordeira | Revisión del agente · configuración de las corridas |
+| Mateo García | Caso excelente · calibración, estabilidad y ensayo externo |
+| Tomás García | Casos flojo y tramposo |
 
 ## Estructura del repositorio
 
@@ -83,5 +83,15 @@ el método de calibración.
 
 ## Estado
 
-Integración y cierre para la entrega. Última actualización: 9 de septiembre de 2026.
+El agente está construido e integrado, con V3 como rúbrica ejecutable. H2 está cerrado e
+integrado mediante el [PR #10](https://github.com/tonimorelli/agente-corrector/pull/10).
+Los tres casos están calibrados y las segundas corridas demostraron estabilidad de niveles
+en las cinco dimensiones; la diferencia de un punto en el caso flojo responde a un cambio
+de rúbrica documentado en `calibracion.md`.
+
+El ensayo sobre un repositorio externo real fue exitoso y quedó integrado mediante el
+[PR #11](https://github.com/tonimorelli/agente-corrector/pull/11); valida el funcionamiento
+sobre una estructura externa, no la calibración de su nota.
+
+El proyecto está en etapa de **QA final y entrega**. Última actualización: 10 de septiembre de 2026.
 Ver `QA_CONSIGNA.md` para el estado de cumplimiento punto por punto contra la consigna del parcial.
