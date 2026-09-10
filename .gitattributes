@@ -1,0 +1,6 @@
+# Normalizar finales de línea en texto; tratar los binarios como binarios
+* text=auto eol=lf
+*.md text eol=lf
+
+*.pdf binary
+*.docx binary
